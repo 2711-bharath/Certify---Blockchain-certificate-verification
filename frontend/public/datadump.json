@@ -1,0 +1,604 @@
+[
+    {
+        "equipment_name": "abc1",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc2",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc1",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc2",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc1",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc2",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc8",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc9",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc8",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc9",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc8",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc9",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc8",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc9",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc3",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc4",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc5",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc6",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc7",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Not Resolved"
+    },
+    {
+        "equipment_name": "abc8",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc9",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc10",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc11",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    },
+    {
+        "equipment_name": "abc12",
+        "type": "Grid Power Outage",
+        "details": "Grid Power Outage",
+        "triggered_on": "Today",
+        "status": "Resolved"
+    }
+]
