@@ -1,5 +1,8 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
+
+import PageNotFound from "../shared/404/page-not-found.vue";
+
 import LandingPage from "../modules/landing-page/pages/landing-page.vue";
 import Login from "../modules/authentication/login/pages/login.vue";
 import Signup from "../modules/authentication/signup/pages/signup.vue";
@@ -23,8 +26,13 @@ const routes = [
     component: Signup,
   },
   {
+    path: "/404",
+    name: "page-not-found",
+    component: PageNotFound,
+  },
+  {
     path: "*",
-    redirect: "/",
+    redirect: "/404",
   },
 ];
 
