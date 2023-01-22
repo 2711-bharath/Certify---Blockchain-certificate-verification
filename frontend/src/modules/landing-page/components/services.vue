@@ -80,16 +80,16 @@
 
       .card {
         width: 388px;
-        padding: 48px 24px 72px;
+        padding: 48px 24px 62px;
         text-align: center;
 
         &-title {
-          font-size: 28px;
+          font-size: 26px;
           font-weight: 500;
         }
 
         &-description {
-          font-size: 20px;
+          font-size: 18px;
         }
 
         &-icon {
