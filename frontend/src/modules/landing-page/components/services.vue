@@ -1,6 +1,10 @@
 <template>
   <div class="services">
     <h4>Services</h4>
+    <p class="px-3">
+      Discover the amazing features that makes Certify fit for securing your
+      certificates.
+    </p>
     <div class="is-flex">
       <div class="card m-5" v-for="(service, i) in services" :key="i">
         <div>
@@ -58,6 +62,20 @@
               "Lorem Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti on přežil i nástup elektronické sazby v podstatě beze změny. ",
             icon: "fal fa-users-class",
           },
+
+          {
+            name: "Preview before Publish",
+            description:
+              "Preview your certificate or document as many times as you want before we generate it. This will help you in visualising how it would look like in the final draft.",
+            icon: "fal fa-eye",
+          },
+
+          {
+            name: "QR Support",
+            description:
+              "Lorem Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti on přežil i nástup elektronické sazby v podstatě beze změny. ",
+            icon: "fal fa-qrcode",
+          },
         ];
       },
     },
@@ -71,8 +89,17 @@
   $third: rgb(26, 218, 183);
   $fourth: rgb(73, 80, 246);
   $fifth: rgb(232, 48, 201);
+  $sixth: rgb(189, 150, 255);
+  $seventh: rgb(142, 200, 165);
 
   .services {
+    p {
+      font-size: 20px;
+      margin: 0 auto;
+      text-align: center;
+      min-width: 388px;
+      max-width: 450px;
+    }
     .is-flex {
       display: flex;
       justify-content: center;
@@ -132,6 +159,18 @@
           .card-icon {
             color: $fifth;
             border: 6px solid rgba($fifth, 0.5);
+          }
+        }
+        &:nth-child(6) {
+          .card-icon {
+            color: $sixth;
+            border: 6px solid rgba($sixth, 0.5);
+          }
+        }
+        &:nth-child(7) {
+          .card-icon {
+            color: $seventh;
+            border: 6px solid rgba($seventh, 0.5);
           }
         }
       }
