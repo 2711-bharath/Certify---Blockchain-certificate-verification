@@ -13,8 +13,8 @@
         <h5 class="objectives my-3">Objectives</h5>
       </div>
       <div>
-        <p v-for="(objective, i) in objectives" :key="i" class="item py-3">
-          <i class="far fa-check-square fa-lg mr-2"></i> {{ objective }}
+        <p v-for="(objective, i) in objectives" :key="i" class="item p-3">
+          <i class="far fa-check-square fa-lg mr-3"></i> {{ objective }}
         </p>
       </div>
     </div>
@@ -51,7 +51,7 @@
       font-weight: 500;
     }
     .item-icon .fal {
-      font-size: 100px;
+      font-size: 110px;
       color: rgb(26, 218, 183);
     }
     .is-flex {
