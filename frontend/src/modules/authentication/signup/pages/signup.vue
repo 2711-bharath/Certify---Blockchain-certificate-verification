@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <div class="card">
+    <div class="card px-3">
       <div class="card-content">
         <div class="content">
           <h5 class="my-3">Create Account</h5>
