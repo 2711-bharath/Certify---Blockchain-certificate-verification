@@ -2,10 +2,6 @@ import Vue from "vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import VueFusionCharts from "vue-fusioncharts";
-import FusionCharts from "fusioncharts";
-import Column2D from "fusioncharts/fusioncharts.charts";
-import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import vClickOutside from "v-click-outside";
 
 import "buefy/dist/buefy.css";
@@ -40,7 +36,6 @@ import router from "./route/index";
 import store from "./store/index";
 import "./utils/styles/global.scss";
 
-Vue.use(VueFusionCharts, FusionCharts, Column2D, FusionTheme);
 Vue.use(Dropdown);
 Vue.use(Modal);
 Vue.use(Numberinput);

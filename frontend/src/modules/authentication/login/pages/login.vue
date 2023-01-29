@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login px-3">
     <div class="card">
       <div class="card-content">
         <div class="content">

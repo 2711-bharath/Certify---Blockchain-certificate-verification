@@ -35,7 +35,6 @@
   .page {
     width: 100vw;
     padding-top: 54px;
-    min-height: calc(100vw - 54px);
     &:first-child {
       padding-top: 0px;
     }
