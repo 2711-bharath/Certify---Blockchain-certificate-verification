@@ -16,10 +16,8 @@
     "buefy": "^0.9.22",
     "bulma": "^0.9.3",
     "core-js": "^3.6.5",
-    "fusioncharts": "^3.18.0",
     "v-click-outside": "^3.2.0",
     "vue": "^2.6.11",
-    "vue-fusioncharts": "^3.2.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.6.2"
   },
