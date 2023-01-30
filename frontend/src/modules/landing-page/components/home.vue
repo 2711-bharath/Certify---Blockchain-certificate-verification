@@ -23,12 +23,6 @@
   </div>
 </template>
 
-<script>
-  export default {
-    created() {},
-  };
-</script>
-
 <style lang="scss" scoped>
   .home {
     margin: 24px 0;
