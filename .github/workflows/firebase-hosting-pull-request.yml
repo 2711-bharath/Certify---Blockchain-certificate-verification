@@ -12,7 +12,7 @@ jobs:
       - name: Change directory
         run: cd frontend
       - name: Install dependencies
-        run: npm ci
+        run: npm i --save
       - name: Build dependencies
         run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
