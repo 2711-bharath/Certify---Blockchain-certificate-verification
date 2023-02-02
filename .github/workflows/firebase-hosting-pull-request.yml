@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Change directory
-        run: cd frontend
-      - name: Instal and Build Dependencies
-        run: npm ci && npm run build
+      - name: Change directory, Install and Build Dependencies
+        run: |
+          cd frontend
+          npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
