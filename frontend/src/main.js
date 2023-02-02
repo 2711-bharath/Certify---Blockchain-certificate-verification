@@ -31,14 +31,18 @@ import {
   Tag,
 } from "buefy";
 
+import VueViewer from "v-viewer";
 import App from "./App.vue";
 import router from "./route/index";
 import store from "./store/index";
 import "./utils/styles/global.scss";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "viewerjs/dist/viewer.css";
 
 import("@uppy/core/dist/style.css");
 import("@uppy/dashboard/dist/style.css");
 
+Vue.use(VueViewer);
 Vue.use(Dropdown);
 Vue.use(Modal);
 Vue.use(Numberinput);
