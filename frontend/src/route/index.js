@@ -7,6 +7,8 @@ import LandingPage from "../modules/landing-page/pages/landing-page.vue";
 import Login from "../modules/authentication/login/pages/login.vue";
 import Signup from "../modules/authentication/signup/pages/signup.vue";
 
+import ListCertificate from "../modules/student/list-certificates/pages/list-certificates.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -24,6 +26,11 @@ const routes = [
     path: "/sign-up",
     name: "signup",
     component: Signup,
+  },
+  {
+    path: "/list-certificates",
+    name: "list-certificates",
+    component: ListCertificate,
   },
   {
     path: "/404",

@@ -32,9 +32,12 @@
       @click="dropdown_active = false"
     >
       <a class="navbar-item" href="/"> Home </a>
-      <a class="navbar-item" href="#about"> About </a>
-      <a class="navbar-item" href="#services"> Services </a>
-      <a class="navbar-item" href="#contact"> Contact us </a>
+      <a class="navbar-item" href="/#about"> About </a>
+      <a class="navbar-item" href="/#services"> Services </a>
+      <a class="navbar-item" href="/#contact"> Contact us </a>
+      <router-link class="navbar-item" to="/list-certificates" exact>
+        List Files
+      </router-link>
     </div>
     <div class="navbar-end">
       <div
