@@ -9,9 +9,6 @@
   import Dashboard from "@uppy/dashboard";
   import { storage } from "../../utils/plugins/firebase";
 
-  import("@uppy/core/dist/style.css");
-  import("@uppy/dashboard/dist/style.css");
-
   export default {
     name: "App",
     components: {},
@@ -21,6 +18,15 @@
     mounted() {
       this.uppy = new Uppy({
         debug: true,
+        restrictions: {
+          maxFileSize: null,
+          minFileSize: null,
+          maxTotalFileSize: null,
+          maxNumberOfFiles: 10,
+          minNumberOfFiles: 1,
+          allowedFileTypes: ["image/*", ".jpg", ".jpeg", ".png", ".pdf"],
+          requiredMetaFields: [],
+        },
       })
         .use(Dashboard, {
           trigger: ".UppyModalOpenerBtn",
@@ -32,9 +38,9 @@
           metaFields: [
             { id: "name", name: "Name", placeholder: "file name" },
             {
-              id: "caption",
-              name: "Caption",
-              placeholder: "describe what the image is about",
+              id: "description",
+              name: "Description",
+              placeholder: "describe what the certificate is about",
             },
           ],
           browserBackButtonClose: true,
@@ -87,22 +93,23 @@
         this.uppy.setState({
           totalProgress: 100,
         });
-        this.$emit("close", promises);
+        this.$emit("addFiles", promises);
+        this.$emit("close");
       },
       async uploadFile(file, user) {
-        let fileLink = "";
-        const filePath = `users/${user.uid}/attachments/${Date.now()}-${
-          file.name
-        }`;
+        const filePath = `users/${user.uid}/attachments/${file.name}`;
+
+        const storageRef = storage.ref(filePath);
 
         try {
-          const storageRef = storage.ref(filePath);
-          const res = await storageRef.put(file);
-          fileLink = await res.ref.getDownloadURL();
+          const res = await storageRef.put(file.data);
+          const url = await res.ref.getDownloadURL();
+          console.log(url);
+          return String(url);
         } catch (err) {
           console.log(err.message);
         }
-        return fileLink;
+        return "";
       },
     },
     beforeDestroy() {

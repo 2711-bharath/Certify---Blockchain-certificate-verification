@@ -35,7 +35,6 @@
       <a class="navbar-item" href="/#about"> About </a>
       <a class="navbar-item" href="/#services"> Services </a>
       <a class="navbar-item" href="/#contact"> Contact us </a>
-      <a class="navbar-item" @click="openPopup">Upload Box</a>
     </div>
     <div class="navbar-end">
       <div
@@ -66,8 +65,6 @@
 </template>
 
 <script>
-  import FileUpload from "../upload/file-upload.vue";
-
   export default {
     data() {
       return {
@@ -88,20 +85,6 @@
           });
         });
       });
-    },
-    methods: {
-      openPopup() {
-        this.$buefy.modal.open({
-          component: FileUpload,
-          parent: this,
-          width: 650,
-          events: {
-            close(files) {
-              console.log("Close", files);
-            },
-          },
-        });
-      },
     },
   };
 </script>
