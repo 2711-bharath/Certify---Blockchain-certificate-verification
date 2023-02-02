@@ -12,7 +12,11 @@ jobs:
       - name: Change directory
         run: cd frontend
       - name: Install dependencies
-        run: npm i --save
+        with:
+          node-version: '8.12.1'
+        run: |
+          npm ci
+          npm run prettier-check
       - name: Build dependencies
         run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
