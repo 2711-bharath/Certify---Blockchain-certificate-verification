@@ -21,6 +21,10 @@ const User = mongoose.Schema({
     username: {
         type: String,
         required: true
+    },
+    uid: {
+        type: String,
+        required: true
     }
 });
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connect = () => {
     mongoose.set('strictQuery', false);
-    let res = mongoose.connect('mongodb://localhost:27017/major_project', (err, conn) => {
+    mongoose.connect('mongodb://localhost:27017/major_project', (err, conn) => {
         if (err) {
             console.log(err);
         }

@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const shortid = require('shortid');
 
 const loginController = async (req, res, next) => {
     const body = req.body;
@@ -22,7 +23,8 @@ const signupController = async (req, res, next) => {
     const hashed = await bcrypt.hash(password, 10);
     let userObj = new User({
         username,
-        password: hashed
+        password: hashed,
+        uid: shortid.generate()
     });
     await userObj.save();
     return res.send(userObj);
