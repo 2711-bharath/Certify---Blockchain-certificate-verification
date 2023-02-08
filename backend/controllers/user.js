@@ -1,36 +1,53 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/User');
-const shortid = require('shortid');
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
+const shortid = require("shortid");
 
 const loginController = async (req, res, next) => {
-    const body = req.body;
-    const username = body.username;
-    const password = body.password;
-    const usrObj = await User.findOne({ username: username });
-    const hpwd = usrObj.password;
-    console.log(usrObj);
-    let comp = await bcrypt.compare(password, hpwd);
-    if (comp) {
-        return res.send(usrObj);
-    }
+  const body = req.body;
+  const username = body.username;
+  const password = body.password;
+  const usrObj = await User.findOne({ username: username });
+  const hpwd = usrObj.password;
+  console.log(usrObj);
+  let comp = await bcrypt.compare(password, hpwd);
+  if (comp) {
+    return res.send(usrObj);
+  }
+  return res.send({ result: false });
+};
+
+const updateController = async (req, res, next) => {
+  const body = req.body;
+  const username = body.username;
+  const usrObj = await User.findOne({ username: username });
+  usrObj.profile = body.profile;
+  try {
+    await userObj.save();
+    return res.send(usrObj);
+  } catch (err) {
+    console.log(err);
     return res.send({ result: false });
+  }
 };
 
 const signupController = async (req, res, next) => {
-    const body = req.body;
-    const username = body.username;
-    const password = body.password;
-    const hashed = await bcrypt.hash(password, 10);
-    let userObj = new User({
-        username,
-        password: hashed,
-        uid: shortid.generate()
-    });
-    await userObj.save();
-    return res.send(userObj);
+  const body = req.body;
+  const username = body.username;
+  const password = body.password;
+  const type = body.type;
+  const hashed = await bcrypt.hash(password, 10);
+  let userObj = new User({
+    username,
+    password: hashed,
+    type,
+    uid: shortid.generate(),
+  });
+  await userObj.save();
+  return res.send(userObj);
 };
 
 module.exports = {
-    loginController,
-    signupController
+  loginController,
+  signupController,
+  updateController,
 };
