@@ -8,6 +8,10 @@ app.use(express.json());
 
 app.use('/user', userRouter);
 
+app.get('/', (req, res) => {
+    res.send('Welcome to Blockchain Certificate Storage Backend');
+})
+
 app.listen(3000, async () => {
     console.log('listening to port 3000');
     await connect();
