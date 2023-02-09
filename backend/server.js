@@ -1,6 +1,6 @@
 const express = require("express");
-import dotenv from "dotenv";
-import cors from "cors";
+const dotenv = require("dotenv");
+const cors = require("cors");
 const { connect } = require("./DB/connect");
 const userRouter = require("./routes/userRoute");
 
@@ -17,7 +17,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to Blockchain Certificate Storage Backend");
 });
 
-app.listen(process.env.PORT || 3000, async () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, async () => {
   console.log("listening to port 3000");
   await connect();
 });
