@@ -1,0 +1,21 @@
+{
+  "name": "blockchain-certificate-verification",
+  "version": "1.0.0",
+  "description": "Backend",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd functions && yarn",
+    "deploy": "firebase deploy",
+    "serve": "firebase serve --only functions,deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2711-bharath/Blockchain-certificate-verification.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2711-bharath/Blockchain-certificate-verification/issues"
+  },
+  "homepage": "https://github.com/2711-bharath/Blockchain-certificate-verification#readme"
+}
