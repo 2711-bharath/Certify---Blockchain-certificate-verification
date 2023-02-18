@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div class="columns is-gapless">
-      <Sidebar v-if="is_logged_in" />
+      <!-- <Sidebar v-if="is_logged_in" /> -->
       <div class="column is-size-1 has-text-centered main">
         <router-view />
       </div>
@@ -11,25 +11,28 @@
 </template>
 
 <script>
-  import Header from "./shared/header/Header.vue";
-  import Sidebar from "./shared/sidebar/Sidebar.vue";
+import { mapActions, mapGetters } from "vuex";
+import Header from "./shared/header/Header.vue";
+// import Sidebar from "./shared/sidebar/Sidebar.vue";
 
-  export default {
-    name: "App",
-    components: {
-      Sidebar,
-      Header,
-    },
-    computed: {
-      is_logged_in() {
-        return Boolean(localStorage.getItem("user"));
-      },
-    },
-  };
+export default {
+  name: "App",
+  components: {
+    Header,
+  },
+  computed: mapGetters(["isLoggedIn", "user"]),
+  async created() {
+    if (Object.values(this.user).length === 0)
+      await this.getUser({ userId: localStorage.getItem("user_id") });
+  },
+  methods: {
+    ...mapActions(["getUser"]),
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .main {
-    position: relative;
-  }
+.main {
+  position: relative;
+}
 </style>

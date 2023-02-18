@@ -82,8 +82,29 @@ const signupController = async (req, res, next) => {
   }
 };
 
+const getUserController = async (req, res, next) => {
+  try {
+    const { uid } = req.params;
+    let userObj = await User.findOne({ uid: uid });
+    if (userObj)
+      return res.send({
+        result: true,
+        user: userObj,
+      });
+    else
+      return res.send({
+        result: false,
+        user: null,
+      });
+  } catch (err) {
+    console.log("Error occurred", err);
+    return res.send({ result: false, user: null, message: "Error occurred" });
+  }
+};
+
 module.exports = {
   loginController,
   signupController,
   updateController,
+  getUserController,
 };

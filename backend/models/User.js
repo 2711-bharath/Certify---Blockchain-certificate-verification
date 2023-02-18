@@ -9,7 +9,7 @@ const User = mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: ["student", "teacher", "employer"],
+      enum: ["student", "university", "employer"],
     },
     password: {
       type: String,

@@ -3,12 +3,14 @@ const {
   signupController,
   loginController,
   updateController,
+  getUserController,
 } = require("../controllers/user");
 
 const router = express.Router();
 
+router.get("/:uid", getUserController);
 router.post("/login", loginController);
 router.post("/signup", signupController);
-router.put("/update", updateController);
+router.patch("/update", updateController);
 
 module.exports = router;

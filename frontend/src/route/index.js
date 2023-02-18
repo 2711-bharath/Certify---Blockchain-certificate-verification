@@ -7,7 +7,9 @@ import LandingPage from "../modules/landing-page/pages/landing-page.vue";
 import Login from "../modules/authentication/login/pages/login.vue";
 import Signup from "../modules/authentication/signup/pages/signup.vue";
 
+import Dashboard from "../modules/dashboard/pages/dashboard.vue";
 import ListCertificate from "../modules/student/list-certificates/pages/list-certificates.vue";
+import Profile from "../modules/profile/pages/profile.vue";
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,16 @@ const routes = [
     path: "/sign-up",
     name: "signup",
     component: Signup,
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
   },
   {
     path: "/list-certificates",

@@ -1,3 +1,4 @@
+import "vue-toast-notification/dist/theme-sugar.css";
 import Vue from "vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +32,7 @@ import {
   Tag,
 } from "buefy";
 
+import VueToast from "vue-toast-notification";
 import VueViewer from "v-viewer";
 import App from "./App.vue";
 import router from "./route/index";
@@ -67,6 +69,10 @@ Vue.use(Tag);
 Vue.use(Progress);
 
 Vue.use(vClickOutside);
+Vue.use(VueToast, {
+  position: "top",
+  duration: 4500,
+});
 
 library.add(fas);
 Vue.component("font-aws-icon", FontAwesomeIcon);
