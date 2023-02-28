@@ -4,8 +4,8 @@ import "math/big"
 
 type Block struct {
 	BlockId       string `json:"blockid"`
-	StringData    string `json:"stringdata"`
-	CertificateId []byte `json:"data"`
+	HashedData    []byte `json:"hashed_data"`
+	CertificateId string `json:"data"`
 	ImageUrl      string
 	Owner         string
 	PrevHash      []byte `json:"prevhash"`
@@ -13,6 +13,7 @@ type Block struct {
 	Nonce         int64  `json:"nonce"`
 	Mined         bool   `json:"mined"`
 	ImageHash     []byte `json:"image_hash"`
+	UserUid string `json:"user_uid"`
 }
 
 type BlockChain struct {

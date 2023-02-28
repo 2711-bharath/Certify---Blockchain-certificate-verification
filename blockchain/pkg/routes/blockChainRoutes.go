@@ -8,7 +8,9 @@ import (
 func BlockChainRoutes(app *fiber.App) {
 	route := app.Group("/api/v1")
 
-	route.Post("/mine_block", controllers.MineBlock)
-	route.Post("/add_block", controllers.AddBlock)
-	route.Get("/get_block/:blockid", controllers.GetBlock)
+	route.Post("/mineBlock", controllers.MineBlock)
+	route.Post("/addBlock", controllers.AddBlock)
+	route.Get("/getBlock/:blockid", controllers.GetBlock)
+	route.Get("/getChain",controllers.GetChain)
+	route.Get("/getBlocks",controllers.GetBlocks)
 }
