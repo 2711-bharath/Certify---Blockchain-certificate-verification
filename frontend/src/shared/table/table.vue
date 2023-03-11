@@ -1,5 +1,5 @@
 <template>
-  <div class="generic-table">
+  <div class="reusable-table">
     <div v-if="data.length === 0" class="no-data">
       <div>
         <img src="../../assets/no-certificates.png" alt="" class="image" />
@@ -7,11 +7,23 @@
       </div>
     </div>
     <template v-else>
-      <div class="columns">
+      <div class="columns mt-3 reusable-table-header">
         <div class="column is-half">Name</div>
         <div class="column">Owner</div>
         <div class="column">Last Modified</div>
         <div class="column">File size</div>
+      </div>
+      <div
+        class="columns reusable-table-row"
+        v-for="certificate in data"
+        :key="certificate.uid"
+      >
+        <div class="column is-half">{{ certificate.name }}</div>
+        <div class="column">{{ getOwner(certificate.userUid) }}</div>
+        <div class="column">
+          {{ getFormattedDate(certificate.file.lastModifiedDate) }}
+        </div>
+        <div class="column">{{ getFileSize(certificate.file.size) }}</div>
       </div>
     </template>
   </div>
@@ -25,11 +37,37 @@ export default {
       default: () => [],
     },
   },
+  methods: {
+    getFileSize(size) {
+      const fSExt = ["Bytes", "KB", "MB", "GB"];
+      let i = 0;
+      // eslint-disable-next-line no-underscore-dangle
+      let _size = size;
+      while (_size > 900) {
+        _size /= 1024;
+        // eslint-disable-next-line no-plusplus
+        i++;
+      }
+      const exactSize = `${Math.round(_size * 100) / 100} ${fSExt[i]}`;
+      return exactSize;
+    },
+    getOwner(uid) {
+      if (uid === localStorage.getItem("user_id")) return "me";
+      return "-";
+    },
+    getFormattedDate(date) {
+      return new Date(date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.generic-table {
+.reusable-table {
   text-align: start;
   font-size: 14px;
   padding-top: 10px;
@@ -50,6 +88,15 @@ export default {
     .image {
       width: 320px;
       height: 320px;
+    }
+  }
+  &-header {
+    font-weight: 500;
+  }
+  &-row {
+    cursor: pointer;
+    &:hover {
+      background-color: #dadce0;
     }
   }
 }

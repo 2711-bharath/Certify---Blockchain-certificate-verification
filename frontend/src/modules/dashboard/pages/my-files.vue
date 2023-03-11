@@ -13,11 +13,12 @@
         </button>
       </div>
     </div>
-    <Table />
+    <Table :data="certificates" />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import Table from "../../../shared/table/table.vue";
 import UploadPopup from "../components/upload-popup.vue";
 
@@ -25,16 +26,31 @@ export default {
   components: {
     Table,
   },
+  async created() {
+    this.is_loading = true;
+    await this.getCertificates({
+      userId: localStorage.getItem("user_id"),
+      shared: "none",
+    });
+    this.is_loading = false;
+  },
+  data() {
+    return {
+      is_loading: false,
+    };
+  },
+  computed: mapGetters(["certificates"]),
   methods: {
+    ...mapActions(["getCertificates"]),
+    ...mapMutations(["setCertificates"]),
     openUploadPopup() {
       this.$buefy.modal.open({
         component: UploadPopup,
         parent: this,
         width: 500,
         events: {
-          addFiles: (files) => {
-            this.certificates = files;
-            console.log("add files", files);
+          addCertificate: (file) => {
+            this.setCertificates([...this.certificates, file]);
           },
         },
       });
