@@ -13,7 +13,7 @@ type Block struct {
 	Nonce         int64  `json:"nonce"`
 	Mined         bool   `json:"mined"`
 	ImageHash     []byte `json:"image_hash"`
-	UserUid string `json:"user_uid"`
+	UserUid       string `json:"user_uid"`
 }
 
 type BlockChain struct {
