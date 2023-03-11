@@ -112,7 +112,7 @@ export default {
         if (data.result) {
           this.setUser(data.user);
           this.setLocalState({ userId: data.user.uid });
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: "certificates" });
         }
       }
       this.is_loading = false;

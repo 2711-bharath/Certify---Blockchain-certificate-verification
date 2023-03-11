@@ -17,7 +17,7 @@ func main() {
 	routes.BlockChainRoutes(app)
 
 	db.Connect()
-	db.ConnectRedis()
+	// db.ConnectRedis()
 
 	app.Listen(":8080")
 }
