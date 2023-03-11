@@ -16,58 +16,66 @@
           to="/sign-up"
           exact
         >
-          Create a new account
+          {{ isLoggedIn ? "View Certificates" : "Create a new account" }}
         </router-link>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { mapGetters } from "vuex";
 
+export default {
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
+  },
+};
+</script>
 <style lang="scss" scoped>
-  .home {
-    margin: 24px 0;
-    .is-flex {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-wrap: wrap;
+.home {
+  margin: 24px 0;
+  .is-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
 
+    .content {
+      width: 50vw;
+      &-title {
+        font-size: 72px;
+      }
+
+      &-description {
+        font-size: 28px;
+      }
+
+      .is-link {
+        background-color: #ba68c8;
+      }
+    }
+
+    .img img {
+      max-width: 600px;
+      width: 40vw;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .img img {
+        min-width: 280px;
+        max-width: 600px;
+      }
       .content {
-        width: 50vw;
+        width: 100vw;
         &-title {
-          font-size: 72px;
+          font-size: 38px;
         }
 
         &-description {
-          font-size: 28px;
-        }
-
-        .is-link {
-          background-color: #ba68c8;
-        }
-      }
-
-      .img img {
-        max-width: 600px;
-        width: 40vw;
-      }
-
-      @media only screen and (max-width: 600px) {
-        .img img {
-          min-width: 280px;
-          max-width: 600px;
-        }
-        .content {
-          width: 100vw;
-          &-title {
-            font-size: 38px;
-          }
-
-          &-description {
-            font-size: 18px;
-          }
+          font-size: 18px;
         }
       }
     }
   }
+}
 </style>

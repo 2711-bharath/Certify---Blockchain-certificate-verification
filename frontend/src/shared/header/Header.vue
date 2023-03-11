@@ -6,12 +6,12 @@
     v-click-outside="() => (dropdown_active = false)"
   >
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <router-link class="navbar-item" to="/">
         <img
           src="../../assets/logo.png"
           alt="Bulma: a modern CSS framework based on Flexbox"
         />
-      </a>
+      </router-link>
       <div
         class="navbar-burger"
         data-target="navbarToggle"
@@ -29,23 +29,23 @@
       :class="{ 'd-block': dropdown_active }"
       @click="dropdown_active = false"
     >
-      <template v-if="!isLoggedIn">
+      <template v-if="isLoggedIn">
         <a class="navbar-item" href="/"> Home </a>
         <a class="navbar-item" href="/#about"> About </a>
         <a class="navbar-item" href="/#services"> Services </a>
         <a class="navbar-item" href="/#contact"> Contact us </a>
       </template>
-      <template v-else>
+      <!-- <template v-else>
         <router-link class="navbar-item" to="/dashboard" exact>
           Dashboard
         </router-link>
         <router-link class="navbar-item" to="/list-certificates" exact>
           Certificates
         </router-link>
-      </template>
+      </template> -->
     </div>
     <div class="navbar-end">
-      <div
+      <!-- <div
         v-if="isLoggedIn"
         class="navbar-item has-dropdown mr-5"
         :class="{ 'is-active': user_dropdown_active }"
@@ -89,7 +89,7 @@
             <i class="far fa-sign-out fa-xl mr-2"></i> Logout
           </router-link>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
@@ -98,6 +98,11 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
+  props: {
+    show_sidebar: {
+      type: Boolean,
+    },
+  },
   data() {
     return {
       dropdown_active: false,

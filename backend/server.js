@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 
 const { connect } = require("./DB/connect");
 const userRouter = require("./routes/userRoute");
-const certificateRoute = require('./routes/certificateRoute');
+const certificateRoute = require("./routes/certificateRoute");
 
 const app = express();
 dotenv.config();
@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
   if (cookie === undefined) {
     console.log("no cookie");
   } else {
-    console.log('cookie exists', cookie);
+    console.log("cookie exists", cookie);
   }
   next();
 });
