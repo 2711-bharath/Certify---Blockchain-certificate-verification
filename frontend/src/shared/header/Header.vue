@@ -15,7 +15,11 @@
       <div
         class="navbar-burger"
         data-target="navbarToggle"
-        @click="dropdown_active = !dropdown_active"
+        @click="
+          show_sidebar
+            ? $emit('toggleSidebar')
+            : (dropdown_active = !dropdown_active)
+        "
       >
         <span></span>
         <span></span>
@@ -29,7 +33,7 @@
       :class="{ 'd-block': dropdown_active }"
       @click="dropdown_active = false"
     >
-      <template v-if="isLoggedIn">
+      <template v-if="!show_sidebar">
         <a class="navbar-item" href="/"> Home </a>
         <a class="navbar-item" href="/#about"> About </a>
         <a class="navbar-item" href="/#services"> Services </a>

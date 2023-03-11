@@ -1,7 +1,21 @@
 <template>
-  <div class="column">
+  <div
+    :class="[
+      windowWidth > 1015 ? 'column' : 'sidebar',
+      windowWidth < 1015 ? (open_sidebar ? 'open' : 'close') : '',
+    ]"
+  >
     <aside class="menu">
-      <ul class="menu-list">
+      <ul
+        class="menu-list"
+        v-if="open_sidebar"
+        v-click-outside="() => $emit('close')"
+      >
+        <li v-if="open_sidebar">
+          <router-link to="/" active-class="is-active" exact>
+            <i class="far fa-home-alt"></i> Home
+          </router-link>
+        </li>
         <li>
           <router-link to="/files" active-class="is-active" exact>
             <i class="far fa-file-certificate"></i> My Files
@@ -20,12 +34,40 @@
 <script>
 export default {
   name: "Sidebar",
+  props: {
+    windowWidth: {
+      type: Number,
+    },
+    open_sidebar: {
+      type: Boolean,
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .column {
   flex: 0 0 16rem;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  &.open {
+    .menu {
+      left: 0;
+    }
+  }
+  &.close {
+    .menu {
+      left: -16rem;
+    }
+  }
+  .menu {
+    background-color: white;
+    transition: all 300ms ease-in-out;
+  }
 }
 
 .menu {

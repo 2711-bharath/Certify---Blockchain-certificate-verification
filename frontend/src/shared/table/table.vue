@@ -9,9 +9,9 @@
     <template v-else>
       <div class="columns mt-3 reusable-table-header">
         <div class="column is-half">Name</div>
-        <div class="column">Owner</div>
-        <div class="column">Last Modified</div>
-        <div class="column">File size</div>
+        <div class="column" v-if="getWidth > 770">Owner</div>
+        <div class="column" v-if="getWidth > 770">Last Modified</div>
+        <div class="column" v-if="getWidth > 770">File size</div>
       </div>
       <div
         class="columns reusable-table-row"
@@ -19,17 +19,23 @@
         :key="certificate.uid"
       >
         <div class="column is-half">{{ certificate.name }}</div>
-        <div class="column">{{ getOwner(certificate.userUid) }}</div>
-        <div class="column">
+        <div class="column" v-if="getWidth > 770">
+          {{ getOwner(certificate.userUid) }}
+        </div>
+        <div class="column" v-if="getWidth > 770">
           {{ getFormattedDate(certificate.file.lastModifiedDate) }}
         </div>
-        <div class="column">{{ getFileSize(certificate.file.size) }}</div>
+        <div class="column" v-if="getWidth > 770">
+          {{ getFileSize(certificate.file.size) }}
+        </div>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     data: {
@@ -37,6 +43,7 @@ export default {
       default: () => [],
     },
   },
+  computed: mapGetters(["getWidth"]),
   methods: {
     getFileSize(size) {
       const fSExt = ["Bytes", "KB", "MB", "GB"];
