@@ -1,19 +1,19 @@
 <template>
   <div
     :class="[
-      windowWidth > 1015 ? 'column' : 'sidebar',
-      windowWidth < 1015 ? (open_sidebar ? 'open' : 'close') : '',
+      !is_mobile ? 'column' : 'sidebar',
+      is_mobile ? (open_sidebar ? 'open' : 'close') : '',
     ]"
   >
     <aside class="menu">
       <ul
         class="menu-list"
-        v-if="open_sidebar"
+        v-if="!is_mobile || open_sidebar"
         v-click-outside="() => $emit('close')"
       >
         <li v-if="open_sidebar">
           <router-link to="/" active-class="is-active" exact>
-            <i class="far fa-home-alt"></i> Home
+            <i class="far fa-browser"></i> Home
           </router-link>
         </li>
         <li>
@@ -35,8 +35,8 @@
 export default {
   name: "Sidebar",
   props: {
-    windowWidth: {
-      type: Number,
+    is_mobile: {
+      type: Boolean,
     },
     open_sidebar: {
       type: Boolean,

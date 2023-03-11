@@ -7,7 +7,7 @@
     <div class="columns is-gapless">
       <Sidebar
         v-if="show_sidebar"
-        :windowWidth="windowWidth"
+        :is_mobile="is_mobile"
         :open_sidebar="open_sidebar"
         @close="open_sidebar = false"
       />
@@ -39,11 +39,14 @@ export default {
   watch: {
     $route() {
       this.open_sidebar = false;
-      this.show_sidebar = this.$route.meta().show_sidebar;
+      this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
     },
   },
   computed: {
     ...mapGetters(["isLoggedIn", "user"]),
+    is_mobile() {
+      return this.windowWidth < 1015;
+    },
   },
   mounted() {
     this.$nextTick(() => {

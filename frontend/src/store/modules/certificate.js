@@ -17,7 +17,6 @@ const actions = {
 };
 const mutations = {
   setCertificates: (state, certificates) => {
-    console.log(state.certificates, certificates);
     state.certificates = certificates;
   },
 };
