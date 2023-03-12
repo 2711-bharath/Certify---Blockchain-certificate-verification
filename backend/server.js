@@ -15,16 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
 app.use(cookieParser());
 
-app.use(function (req, res, next) {
-  var cookie = req.cookies;
-  if (cookie === undefined) {
-    console.log("no cookie");
-  } else {
-    console.log("cookie exists", cookie);
-  }
-  next();
-});
-
 app.use("/user", userRouter);
 app.use("/certificate", certificateRoute);
 

@@ -100,8 +100,8 @@ const getCertificates = async (req, res, next) => {
         const { uid, shared } = req.params;
         let certificates = [];
         if (shared === "me")
-            certificates = await Certificate.find({ sharedWith: { $in: [uid] } });
-        else certificates = await Certificate.find({ userUid: uid });
+            certificates = await Certificate.find({ sharedWith: { $in: [uid] }, mined: true });
+        else certificates = await Certificate.find({ userUid: uid, mined: true });
         return res.send({
             result: true,
             certificates: certificates,
