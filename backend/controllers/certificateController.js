@@ -42,6 +42,7 @@ const addCertificate = async (req, res, next) => {
         return res.status(201).send({
             result: true,
             certificate: certificate.toJSON(),
+            message: 'certificate saved succesfully'
         });
     } catch (error) {
         console.log(error);
@@ -94,8 +95,30 @@ const mineBlock = async (req, res, next) => {
 
 };
 
+const getCertificates = async (req, res, next) => {
+    try {
+        const { uid, shared } = req.params;
+        let certificates = [];
+        if (shared === "me")
+            certificates = await Certificate.find({ sharedWith: { $in: [uid] } });
+        else certificates = await Certificate.find({ userUid: uid });
+        return res.send({
+            result: true,
+            certificates: certificates,
+        });
+    } catch (err) {
+        console.log("Error occurred", err);
+        return res.send({
+            result: false,
+            certificates: null,
+            message: "Error occurred",
+        });
+    }
+};
+
 module.exports = {
     addCertificate,
     updateCertificate,
     mineBlock,
+    getCertificates,
 };

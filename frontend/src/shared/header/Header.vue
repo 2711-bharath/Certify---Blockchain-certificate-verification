@@ -13,13 +13,15 @@
         />
       </router-link>
       <div
-        class="navbar-burger"
+        class="navbar-burger is-flex is-align-items-center is-justify-content-center"
         data-target="navbarToggle"
-        @click="dropdown_active = !dropdown_active"
+        @click="
+          show_sidebar
+            ? $emit('toggleSidebar')
+            : (dropdown_active = !dropdown_active)
+        "
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <i class="far fa-bars is-size-5"></i>
       </div>
     </div>
 
@@ -29,67 +31,12 @@
       :class="{ 'd-block': dropdown_active }"
       @click="dropdown_active = false"
     >
-      <template v-if="isLoggedIn">
+      <template v-if="!show_sidebar">
         <a class="navbar-item" href="/"> Home </a>
         <a class="navbar-item" href="/#about"> About </a>
         <a class="navbar-item" href="/#services"> Services </a>
         <a class="navbar-item" href="/#contact"> Contact us </a>
       </template>
-      <!-- <template v-else>
-        <router-link class="navbar-item" to="/dashboard" exact>
-          Dashboard
-        </router-link>
-        <router-link class="navbar-item" to="/list-certificates" exact>
-          Certificates
-        </router-link>
-      </template> -->
-    </div>
-    <div class="navbar-end">
-      <!-- <div
-        v-if="isLoggedIn"
-        class="navbar-item has-dropdown mr-5"
-        :class="{ 'is-active': user_dropdown_active }"
-        v-click-outside="() => (user_dropdown_active = false)"
-      >
-        <div
-          class="navbar-link"
-          @click="user_dropdown_active = !user_dropdown_active"
-        >
-          <i class="far fa-user-circle fa-xl mr-2"></i>
-          {{ user.username || "" }}
-        </div>
-
-        <div class="navbar-dropdown is-right" v-if="user_dropdown_active">
-          <router-link
-            class="navbar-item"
-            to="/profile"
-            @click.native="user_dropdown_active = false"
-            exact
-          >
-            <i class="far fa-user fa-xl mr-2"></i> Profile
-          </router-link>
-          <router-link
-            class="navbar-item"
-            to="/profile"
-            @click.native="user_dropdown_active = false"
-            exact
-          >
-            <i class="far fa-user-cog fa-xl mr-2"></i> Change Password
-          </router-link>
-          <hr class="navbar-divider" />
-          <router-link
-            class="navbar-item"
-            to="/"
-            @click.native="
-              user_dropdown_active = false;
-              removeLocalState();
-            "
-            exact
-          >
-            <i class="far fa-sign-out fa-xl mr-2"></i> Logout
-          </router-link>
-        </div>
-      </div> -->
     </div>
   </nav>
 </template>

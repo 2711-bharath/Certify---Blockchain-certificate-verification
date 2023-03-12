@@ -1,8 +1,16 @@
 <template>
   <div>
-    <Header :show_sidebar="show_sidebar" />
+    <Header
+      :show_sidebar="show_sidebar"
+      @toggleSidebar="open_sidebar = !open_sidebar"
+    />
     <div class="columns is-gapless">
-      <Sidebar v-if="show_sidebar" />
+      <Sidebar
+        v-if="show_sidebar"
+        :is_mobile="is_mobile"
+        :open_sidebar="open_sidebar"
+        @close="open_sidebar = false"
+      />
       <div class="column is-size-1 has-text-centered main">
         <router-view />
       </div>
@@ -11,7 +19,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import Header from "./shared/header/Header.vue";
 import Sidebar from "./shared/sidebar/Sidebar.vue";
 
@@ -24,15 +32,29 @@ export default {
   data() {
     return {
       show_sidebar: false,
+      windowWidth: window.innerWidth,
+      open_sidebar: false,
     };
   },
   watch: {
     $route() {
-      this.show_sidebar = this.$route.meta().show_sidebar;
+      this.open_sidebar = false;
+      this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
     },
   },
   computed: {
     ...mapGetters(["isLoggedIn", "user"]),
+    is_mobile() {
+      return this.windowWidth < 1015;
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
   async created() {
     if (Object.values(this.user).length === 0)
@@ -40,7 +62,12 @@ export default {
     this.show_sidebar = this.$route.meta().show_sidebar;
   },
   methods: {
+    ...mapMutations(["setWidth"]),
     ...mapActions(["getUser"]),
+    onResize() {
+      this.windowWidth = window.innerWidth;
+      this.setWidth(this.windowWidth);
+    },
   },
 };
 </script>

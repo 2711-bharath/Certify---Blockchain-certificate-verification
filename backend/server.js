@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 app.use("/user", userRouter);
 app.use("/certificate", certificateRoute);
 
-app.listen(3000, async () => {
-  console.log("listening to port 3000");
+app.listen(process.env.PORT || 3000, async () => {
+  console.log("listening to port " + (process.env.PORT || 3000));
   await connect();
 });

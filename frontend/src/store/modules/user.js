@@ -4,11 +4,13 @@ import apiService from "../../apis/service";
 const state = {
   userData: {},
   isLoggedIn: Boolean(localStorage.getItem("user")),
+  width: window.innerWidth,
 };
 
 const getters = {
   user: (state) => state.userData,
   isLoggedIn: (state) => state.isLoggedIn,
+  getWidth: (state) => state.width,
 };
 
 const actions = {
@@ -38,6 +40,9 @@ const mutations = {
   },
   setLoggedIn: (state, isLoggedIn) => {
     state.isLoggedIn = isLoggedIn;
+  },
+  setWidth: (state, val) => {
+    state.width = val;
   },
 };
 

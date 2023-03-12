@@ -143,8 +143,16 @@ export default {
         this.form.url = await this.uploadFile(this.form.file, {
           uid: this.user.uid,
         });
+        this.form.file = {
+          lastModified: this.form.file.lastModified,
+          lastModifiedDate: this.form.file.lastModifiedDate,
+          name: this.form.file.name,
+          size: this.form.file.size,
+          type: this.form.file.type,
+        };
         const data = await apiService.post("/certificate", this.form);
-        console.log(data);
+        this.$emit("addCertificate", data.certificate);
+        this.$emit("close");
       } catch (err) {
         console.log(err);
       }
@@ -174,6 +182,7 @@ export default {
   .card-content {
     height: 400px;
     overflow-y: auto;
+    padding: 20px;
   }
   .file-cta {
     width: 436px;
