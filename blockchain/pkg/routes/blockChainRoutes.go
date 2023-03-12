@@ -11,6 +11,6 @@ func BlockChainRoutes(app *fiber.App) {
 	route.Post("/mineBlock", controllers.MineBlock)
 	route.Post("/addBlock", controllers.AddBlock)
 	route.Get("/getBlock/:blockid", controllers.GetBlock)
-	route.Get("/getChain",controllers.GetChain)
-	route.Get("/getBlocks",controllers.GetBlocks)
+	route.Get("/getChain", controllers.GetChain)
+	route.Get("/getBlocks", controllers.GetBlocks)
 }
