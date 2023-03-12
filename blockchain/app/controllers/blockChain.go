@@ -68,6 +68,12 @@ func AddBlock(c *fiber.Ctx) error {
 
 	_, err = db.MI.DB.Collection("blocks").InsertOne(context.TODO(), newBlock)
 
+	if body.InitMined == false {
+		_, err = db.MI.DB.Collection("blocks").DeleteOne(context.TODO(), struct{ certificateid string }{
+			certificateid: body.CertificateUid,
+		})
+	}
+
 	if err != nil {
 		log.Fatal(err)
 		return c.SendString("An error occured")

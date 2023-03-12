@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	// "github.com/joho/godotenv"
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -21,14 +21,14 @@ type MongoInstance struct {
 var MI MongoInstance
 
 func Connect() {
-	// if os.Getenv("APP_ENV") != "production" {
-	// 	err := godotenv.Load()
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// }
+	if os.Getenv("APP_ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://Team14:team14abc@team14.qgldcll.mongodb.net/major_project?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("MONGO_URL")))
 	if err != nil {
 		log.Fatal(err)
 	}
