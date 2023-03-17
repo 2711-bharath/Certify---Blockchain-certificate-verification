@@ -1,19 +1,18 @@
 <template>
-  <component :is="user.type" />
+  <div class="profile">
+    <div class="mb-3">Profile</div>
+    <Profile :user="user" />
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import apiService from "../../../apis/service";
-import Student from "../components/student.vue";
-import University from "../components/university.vue";
-import Company from "../components/company.vue";
+import Profile from "../components/profile-form.vue";
 
 export default {
   components: {
-    Student,
-    University,
-    Company,
+    Profile,
   },
   computed: mapGetters(["user"]),
   methods: {

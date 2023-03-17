@@ -10,8 +10,8 @@ const getters = {
   certificates: (state) => state.certificates,
 };
 const actions = {
-  async getCertificates({ commit }, { userId, shared }) {
-    const data = await apiService.get(`/certificate/${userId}/${shared}`);
+  async getCertificates({ commit }, { userId, status }) {
+    const data = await apiService.get(`/certificate/${userId}/${status}`);
     commit("setCertificates", data.certificates);
   },
 };

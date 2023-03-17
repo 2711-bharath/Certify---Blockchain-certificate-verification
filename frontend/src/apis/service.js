@@ -71,7 +71,8 @@ class ApiService {
 
   async put(path, body = {}) {
     try {
-      const { data } = await this.service.request({
+      console.log(body);
+      const { data } = await this.axiosInstance.request({
         method: "PUT",
         url: path,
         responseType: "json",

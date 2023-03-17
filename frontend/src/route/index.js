@@ -8,6 +8,8 @@ import Login from "../modules/authentication/login/pages/login.vue";
 import Signup from "../modules/authentication/signup/pages/signup.vue";
 
 import Files from "../modules/dashboard/pages/my-files.vue";
+import SharedFiles from "../modules/dashboard/pages/shared-files.vue";
+import Bin from "../modules/dashboard/pages/deleted-files.vue";
 import ListCertificate from "../modules/student/list-certificates/pages/list-certificates.vue";
 import Profile from "../modules/profile/pages/profile.vue";
 
@@ -43,10 +45,28 @@ const routes = [
   },
   {
     path: "/files",
-    name: "Files",
+    name: "my-files",
     component: Files,
     meta: () => ({
       title: "Files",
+      show_sidebar: true,
+    }),
+  },
+  {
+    path: "/shared",
+    name: "shared",
+    component: SharedFiles,
+    meta: () => ({
+      title: "Shared with me",
+      show_sidebar: true,
+    }),
+  },
+  {
+    path: "/bin",
+    name: "deleted",
+    component: Bin,
+    meta: () => ({
+      title: "Bin",
       show_sidebar: true,
     }),
   },

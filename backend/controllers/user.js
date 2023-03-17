@@ -91,8 +91,7 @@ const getUserController = async (req, res, next) => {
         result: true,
         user: userObj,
       });
-    }
-    else {
+    } else {
       return res.send({
         result: false,
         user: null,
