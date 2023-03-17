@@ -32,69 +32,31 @@
 </template>
 
 <script>
-  import FileUpload from "../../../../shared/upload/file-upload.vue";
-  import WebViewer from "../../../../shared/file-viewer/fileViewer.vue";
-
-  export default {
-    data() {
-      return {
-        certificates: [],
-      };
-    },
-    methods: {
-      openPreview(file) {
-        if (file.type.includes("image")) {
-          this.$viewerApi({
-            images: [file.link],
-            options: {
-              navbar: false,
-              movable: false,
-            },
-          });
-        } else {
-          this.$buefy.modal.open({
-            component: WebViewer,
-            parent: this,
-            props: {
-              path: file.link,
-            },
-            width: "90vw",
-          });
-        }
-      },
-      openPopup() {
-        this.$buefy.modal.open({
-          component: FileUpload,
-          parent: this,
-          width: 650,
-          events: {
-            addFiles: (files) => {
-              this.certificates = files;
-              console.log("add files", files);
-            },
-          },
-        });
-      },
-    },
-  };
+export default {
+  data() {
+    return {
+      certificates: [],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .table {
-    font-size: 16px;
-    tr {
-      th {
-        &:first-child,
-        &:last-child {
-          width: 128px;
-        }
-      }
-      th:nth-child(2) {
-        width: 450px;
+.table {
+  font-size: 16px;
+  tr {
+    th {
+      &:first-child,
+      &:last-child {
+        width: 128px;
       }
     }
-    td {
-      text-align: left;
+    th:nth-child(2) {
+      width: 450px;
     }
   }
+  td {
+    text-align: left;
+  }
+}
 </style>
