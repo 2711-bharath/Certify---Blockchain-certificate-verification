@@ -39,7 +39,8 @@ export default {
     };
   },
   watch: {
-    $route() {
+    $route(to) {
+      document.title = to.meta().title || "Certify";
       this.open_sidebar = false;
       this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
       this.checkProfileStatus();
@@ -70,6 +71,7 @@ export default {
       localStorage.getItem("user_id")
     )
       await this.getUser({ userId: localStorage.getItem("user_id") });
+    document.title = this.$route.meta().title || "Certify";
     this.checkProfileStatus();
     this.show_sidebar = this.$route.meta().show_sidebar;
     this.is_loading = false;

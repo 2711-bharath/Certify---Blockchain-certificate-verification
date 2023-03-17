@@ -66,7 +66,10 @@ const updateCertificate = async (req, res, next) => {
   let certificate = await Certificate.findOne({
     uid: uid,
   });
-  _.assign(certificate, { ..._.pick(body, ["sharedWith", "file"]) });
+  const isDeleteChanged = certificate.isDeleted !== body.isDeleted;
+  _.assign(certificate, {
+    ..._.pick(body, ["sharedWith", "file", "isDeleted"]),
+  });
   await certificate.save();
   let nonEditable = _.pick(body, [
     "name",
@@ -90,10 +93,14 @@ const updateCertificate = async (req, res, next) => {
   if (certificate.mined == false) {
     await certificate.save();
   }
+  let message = "Updated Successfully";
+  if (isDeleteChanged)
+    if (certificate.isDeleted) message = "Certificate deleted successfully";
+    else message = "Certificate restored successfully";
   res.status(200).send({
     result: true,
     certificate,
-    message: "success",
+    message,
   });
 };
 

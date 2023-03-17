@@ -10,7 +10,6 @@ import Signup from "../modules/authentication/signup/pages/signup.vue";
 import Files from "../modules/dashboard/pages/my-files.vue";
 import SharedFiles from "../modules/dashboard/pages/shared-files.vue";
 import Bin from "../modules/dashboard/pages/deleted-files.vue";
-import ListCertificate from "../modules/student/list-certificates/pages/list-certificates.vue";
 import Profile from "../modules/profile/pages/profile.vue";
 
 Vue.use(VueRouter);
@@ -45,7 +44,7 @@ const routes = [
   },
   {
     path: "/files",
-    name: "my-files",
+    name: "files",
     component: Files,
     meta: () => ({
       title: "Files",
@@ -76,15 +75,6 @@ const routes = [
     component: Profile,
     meta: () => ({
       title: "Profile",
-      show_sidebar: true,
-    }),
-  },
-  {
-    path: "/list-certificates",
-    name: "list-certificates",
-    component: ListCertificate,
-    meta: () => ({
-      title: "Home",
       show_sidebar: true,
     }),
   },

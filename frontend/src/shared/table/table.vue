@@ -67,11 +67,19 @@
                 <a class="dropdown-item">
                   <i class="far fa-share-alt"></i> Share
                 </a>
-                <a class="dropdown-item" v-if="router_name === 'mine'">
+                <a
+                  class="dropdown-item"
+                  v-if="$route.name === 'files'"
+                  @click.stop="certificateStatus(certificate, true)"
+                >
                   <i class="far fa-trash"></i> Delete
                 </a>
-                <a class="dropdown-item" v-if="router_name === 'bin'">
-                  <i class="far fa-trash-restore"></i> Restore
+                <a
+                  class="dropdown-item"
+                  v-if="$route.name === 'deleted'"
+                  @click.stop="certificateStatus(certificate, false)"
+                >
+                  <i class="far fa-undo"></i> Restore
                 </a>
               </div>
             </div>
@@ -83,7 +91,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -99,13 +107,9 @@ export default {
   },
   computed: {
     ...mapGetters(["getWidth"]),
-    router_name() {
-      if (this.$route.name === "shared") return "shared";
-      if (this.$router.name === "deleted") return "bin";
-      return "mine";
-    },
   },
   methods: {
+    ...mapActions(["updateCertificate"]),
     getFileSize(size) {
       const fSExt = ["Bytes", "KB", "MB", "GB"];
       let i = 0;
@@ -129,6 +133,16 @@ export default {
         month: "short",
         day: "numeric",
       });
+    },
+    async certificateStatus(certificate, deleted = true) {
+      const body = certificate;
+      try {
+        body.isDeleted = deleted;
+        body.file.lastModifiedDate = new Date();
+        await this.updateCertificate({ body });
+      } catch (err) {
+        console.log("🚀 ~ file: my-files.vue:62 ~ delete ~ err:", err);
+      }
     },
   },
 };
