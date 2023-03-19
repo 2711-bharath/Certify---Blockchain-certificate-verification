@@ -116,9 +116,24 @@ const getCertificates = async (req, res, next) => {
     }
 };
 
+const getblockDataForMining = async (req, res, next) => {
+    console.log("here");
+    let blockId = req.params.id;
+    let latestBlock = await axios.get("http://localhost:8080/api/v1/getLatestBlock");
+    let currBlock = await axios.get(`http://localhost:8080/api/v1/getBlock/${blockId}`);
+    console.log(latestBlock, currBlock);
+    return res.status(200).send(
+        {
+            lastBlock: latestBlock.data,
+            block: currBlock.data
+        }
+    );
+};
+
 module.exports = {
     addCertificate,
     updateCertificate,
     mineBlock,
     getCertificates,
+    getblockDataForMining
 };

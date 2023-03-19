@@ -129,12 +129,11 @@ func MineBlock(c *fiber.Ctx) error {
 		set := bson.D{bson.E{Key: "$set", Value: bson.D{bson.E{Key: "prevhash", Value: prevHash}, bson.E{Key: "hash", Value: hash}, bson.E{Key: "mined", Value: true}, bson.E{Key: "nonce", Value: int64(body.Nonce.Int64())}}}}
 		filter := bson.D{{Key: "blockid", Value: body.BlockUid}}
 		db.MI.DB.Collection("blocks").UpdateOne(context.TODO(), filter, set)
-		err := db.RC.Client.Set(context.TODO(), "prevBlock", block.BlockId, 0).Err()
 		if err != nil {
 			log.Fatal(err)
-			return c.SendString("An error occured")
+			return c.JSON(struct{ success bool }{success: false})
 		}
-		return c.JSON("nonce value found")
+		return c.JSON(struct{ success bool }{success: true})
 	} else {
 		fmt.Println("invalid nonce value")
 	}
