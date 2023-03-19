@@ -13,6 +13,7 @@
         />
       </router-link>
       <div
+        v-if="is_mobile"
         class="navbar-burger is-flex is-align-items-center is-justify-content-center"
         data-target="navbarToggle"
         @click="
@@ -42,11 +43,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
     show_sidebar: {
+      type: Boolean,
+    },
+    is_mobile: {
       type: Boolean,
     },
   },
@@ -62,9 +66,6 @@ export default {
       this.dropdown_active = false;
       this.user_dropdown_active = false;
     },
-  },
-  methods: {
-    ...mapActions(["removeLocalState"]),
   },
 };
 </script>

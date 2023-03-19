@@ -144,8 +144,8 @@ export default {
           uid: this.user.uid,
         });
         this.form.file = {
-          lastModified: this.form.file.lastModified,
-          lastModifiedDate: this.form.file.lastModifiedDate,
+          createDate: new Date(),
+          lastModifiedDate: new Date(),
           name: this.form.file.name,
           size: this.form.file.size,
           type: this.form.file.type,

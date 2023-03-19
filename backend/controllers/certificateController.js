@@ -1,7 +1,7 @@
 const Certificate = require("../models/Certificate");
 const shortid = require("shortid");
 const axios = require("axios");
-const _ = require('lodash');
+const _ = require("lodash");
 
 const addCertificate = async (req, res, next) => {
     try {
@@ -36,13 +36,13 @@ const addCertificate = async (req, res, next) => {
             user_uid: userUid,
             certificate_uid: uid,
             date: new Date(),
-            init_mined: true
+            init_mined: true,
         };
         await axios.post("http://localhost:8080/api/v1/addBlock", block);
         return res.status(201).send({
             result: true,
             certificate: certificate.toJSON(),
-            message: 'certificate saved succesfully'
+            message: "certificate saved succesfully",
         });
     } catch (error) {
         console.log(error);
@@ -55,53 +55,77 @@ const addCertificate = async (req, res, next) => {
 
 const updateCertificate = async (req, res, next) => {
     const body = req.body;
-    let uid = _.get(body, ['uid']);
+    let uid = _.get(body, ["uid"]);
     if (!uid) {
         return res.status(404).send({
             result: false,
             certificate: null,
-            message: 'certificate uid is required'
+            message: "certificate uid is required",
         });
     }
     let certificate = await Certificate.findOne({
-        uid: uid
+        uid: uid,
     });
-    _.assign(certificate, { ..._.pick(body, ['sharedWith', 'file']) });
+    const isDeleteChanged = certificate.isDeleted !== body.isDeleted;
+    _.assign(certificate, {
+        ..._.pick(body, ["sharedWith", "file", "isDeleted"]),
+    });
     await certificate.save();
-    let nonEditable = _.pick(body, ['name', 'description', 'url', 'credentialId']);
+    let nonEditable = _.pick(body, [
+        "name",
+        "description",
+        "url",
+        "credentialId",
+    ]);
     if (!_.isEmpty(nonEditable)) {
         _.assign(certificate, nonEditable);
-        let concatData = certificate.name + certificate.description + certificate.url;
+        let concatData =
+            certificate.name + certificate.description + certificate.url;
         let block = {
             string_data: concatData,
             image_url: certificate.URL,
             user_uid: certificate.userUid,
             certificate_uid: uid,
-            init_mined: certificate.mined
+            init_mined: certificate.mined,
         };
         await axios.post("http://localhost:8080/api/v1/addBlock", block);
     }
     if (certificate.mined == false) {
         await certificate.save();
     }
+    let message = "Updated Successfully";
+    if (isDeleteChanged)
+        if (certificate.isDeleted) message = "Certificate deleted successfully";
+        else message = "Certificate restored successfully";
     res.status(200).send({
         result: true,
         certificate,
-        message: 'success'
+        message,
     });
 };
 
-const mineBlock = async (req, res, next) => {
-
-};
+const mineBlock = async (req, res, next) => { };
 
 const getCertificates = async (req, res, next) => {
     try {
-        const { uid, shared } = req.params;
+        const { uid, status } = req.params;
         let certificates = [];
-        if (shared === "me")
-            certificates = await Certificate.find({ sharedWith: { $in: [uid] }, mined: true });
-        else certificates = await Certificate.find({ userUid: uid, mined: true });
+        if (status === "shared")
+            certificates = await Certificate.find({
+                sharedWith: {
+                    $elemMatch: { user_id: uid },
+                },
+            });
+        else if (status === "deleted")
+            certificates = await Certificate.find({
+                userUid: uid,
+                isDeleted: true,
+            });
+        else
+            certificates = await Certificate.find({
+                userUid: uid,
+                isDeleted: false,
+            });
         return res.send({
             result: true,
             certificates: certificates,

@@ -71,8 +71,28 @@ class ApiService {
 
   async put(path, body = {}) {
     try {
-      const { data } = await this.service.request({
+      const { data } = await this.axiosInstance.request({
         method: "PUT",
+        url: path,
+        responseType: "json",
+        data: body,
+      });
+      if (data.message)
+        Vue.$toast.open({
+          message: data.message,
+          type: data.result ? "success" : "error",
+        });
+
+      return data;
+    } catch (err) {
+      throw handleErrors(err);
+    }
+  }
+
+  async patch(path, body = {}) {
+    try {
+      const { data } = await this.axiosInstance.request({
+        method: "PATCH",
         url: path,
         responseType: "json",
         data: body,

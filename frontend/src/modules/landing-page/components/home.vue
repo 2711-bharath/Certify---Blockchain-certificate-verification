@@ -11,12 +11,29 @@
           certificate for Students to share with Companies and others. Easy way
           to share multiple certificates with easy steps.
         </div>
+        <div class="is-flex is-justify-content-center" v-if="!isLoggedIn">
+          <router-link
+            class="button is-link px-5 mt-4 mx-3 is-medium"
+            to="/sign-up"
+            exact
+          >
+            Signup
+          </router-link>
+          <router-link
+            class="button px-5 mt-4 mx-3 is-medium"
+            to="/login"
+            exact
+          >
+            Login
+          </router-link>
+        </div>
         <router-link
+          v-else
           class="button is-link px-5 mt-4 is-medium"
-          to="/sign-up"
+          to="/files"
           exact
         >
-          {{ isLoggedIn ? "View Certificates" : "Create a new account" }}
+          View Certificates
         </router-link>
       </div>
     </div>

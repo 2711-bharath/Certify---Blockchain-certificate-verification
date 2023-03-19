@@ -2,15 +2,7 @@
   <div class="my-files">
     <div class="flex is-justify-content-space-between is-align-items-center">
       <div class="my-files__header">
-        <div class="my-files__header--title">My Certificates</div>
-      </div>
-      <div class="my-files__header--icons">
-        <button
-          class="button is-link is-rounded py-3"
-          @click="openUploadPopup()"
-        >
-          <i class="far fa-plus mr-2"></i> Upload file
-        </button>
+        <div class="my-files__header--title">Bin</div>
       </div>
     </div>
     <Table :data="certificates" />
@@ -18,9 +10,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Table from "../../../shared/table/table.vue";
-import UploadPopup from "../components/upload-popup.vue";
 
 export default {
   components: {
@@ -30,7 +21,7 @@ export default {
     this.is_loading = true;
     await this.getCertificates({
       userId: localStorage.getItem("user_id"),
-      status: "none",
+      status: "deleted",
     });
     this.is_loading = false;
   },
@@ -42,19 +33,6 @@ export default {
   computed: mapGetters(["certificates"]),
   methods: {
     ...mapActions(["getCertificates"]),
-    ...mapMutations(["setCertificates"]),
-    openUploadPopup() {
-      this.$buefy.modal.open({
-        component: UploadPopup,
-        parent: this,
-        width: 500,
-        events: {
-          addCertificate: (file) => {
-            this.setCertificates([...this.certificates, file]);
-          },
-        },
-      });
-    },
   },
 };
 </script>

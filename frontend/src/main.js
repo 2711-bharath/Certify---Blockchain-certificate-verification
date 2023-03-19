@@ -41,9 +41,6 @@ import "./utils/styles/global.scss";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "viewerjs/dist/viewer.css";
 
-import("@uppy/core/dist/style.css");
-import("@uppy/dashboard/dist/style.css");
-
 Vue.use(VueViewer);
 Vue.use(Dropdown);
 Vue.use(Modal);

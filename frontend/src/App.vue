@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div v-if="!is_loading">
     <Header
       :show_sidebar="show_sidebar"
+      :is_mobile="is_mobile"
       @toggleSidebar="open_sidebar = !open_sidebar"
     />
     <div class="columns is-gapless">
@@ -31,21 +32,27 @@ export default {
   },
   data() {
     return {
+      is_loading: false,
       show_sidebar: false,
       windowWidth: window.innerWidth,
       open_sidebar: false,
     };
   },
   watch: {
-    $route() {
+    $route(to) {
+      document.title = to.meta().title || "Certify";
       this.open_sidebar = false;
       this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
+      this.checkProfileStatus();
     },
   },
   computed: {
     ...mapGetters(["isLoggedIn", "user"]),
     is_mobile() {
       return this.windowWidth < 1015;
+    },
+    profile_not_updated() {
+      return this.isLoggedIn && !Object.values(this.user.profile).length;
     },
   },
   mounted() {
@@ -57,9 +64,17 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   async created() {
-    if (Object.values(this.user).length === 0)
+    this.is_loading = true;
+    console.log(localStorage.getItem("user_id"));
+    if (
+      Object.values(this.user).length === 0 &&
+      localStorage.getItem("user_id")
+    )
       await this.getUser({ userId: localStorage.getItem("user_id") });
+    document.title = this.$route.meta().title || "Certify";
+    this.checkProfileStatus();
     this.show_sidebar = this.$route.meta().show_sidebar;
+    this.is_loading = false;
   },
   methods: {
     ...mapMutations(["setWidth"]),
@@ -67,6 +82,10 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth;
       this.setWidth(this.windowWidth);
+    },
+    checkProfileStatus() {
+      if (this.profile_not_updated)
+        if (this.$route.name !== "home") this.$router.push({ name: "profile" });
     },
   },
 };

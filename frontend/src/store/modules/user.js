@@ -20,6 +20,15 @@ const actions = {
     commit("setLoggedIn", true);
   },
 
+  async updateUser({ commit }, { uid, profile }) {
+    const data = await apiService.put("/user/update", {
+      uid,
+      profile,
+    });
+    commit("setUser", data.user);
+  },
+
+
   // eslint-disable-next-line no-empty-pattern
   setLocalState({ commit }, { userId }) {
     localStorage.setItem("user", true);
