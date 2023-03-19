@@ -59,7 +59,6 @@
           <button class="button" @click="resetForm()">Reset</button>
           <button
             class="button is-primary mx-4"
-            :class="[is_loading ? 'is-loading' : '']"
             @click="save()"
             :disabled="!isValid"
           >
@@ -84,7 +83,6 @@ export default {
   data() {
     return {
       form: null,
-      is_loading: false,
     };
   },
   computed: {
@@ -92,7 +90,7 @@ export default {
       return this.form.name.length && this.validateEmail(this.form.email);
     },
     defaultData() {
-      return Object.keys(this.user.profile).length
+      return Object.keys(this.user?.profile || {}).length
         ? this.user.profile
         : {
             name: "",
@@ -100,7 +98,7 @@ export default {
           };
     },
     is_edit() {
-      return Object.keys(this.user.profile).length;
+      return Object.keys(this.user?.profile || {}).length;
     },
   },
   created() {
@@ -121,17 +119,16 @@ export default {
       this.form = { ...this.defaultData };
     },
     async save() {
-      this.is_loading = true;
+      this.$root.isLoading = true;
       try {
         this.updateUser({
           uid: this.user.uid,
           profile: this.form,
         });
-        this.$router.push({ name: "my-files" });
       } catch (err) {
         console.log("🚀 ~ file: student.vue:116 ~ save ~ err:", err);
       }
-      this.is_loading = false;
+      this.$root.isLoading = false;
     },
   },
 };

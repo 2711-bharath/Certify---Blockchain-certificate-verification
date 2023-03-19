@@ -13,4 +13,5 @@ func BlockChainRoutes(app *fiber.App) {
 	route.Get("/getBlock/:blockid", controllers.GetBlock)
 	route.Get("/getChain", controllers.GetChain)
 	route.Get("/getBlocks", controllers.GetBlocks)
+	route.Get("/getLatestBlock", controllers.GetLatestBlock)
 }

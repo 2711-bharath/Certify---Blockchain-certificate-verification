@@ -44,10 +44,13 @@ export default {
   },
   watch: {
     $route(to) {
-      document.title = to.meta().title || "Certify";
-      this.open_sidebar = false;
-      this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
-      this.checkProfileStatus();
+      console.log(to);
+      if (to) {
+        document.title = to.meta().title || "Certify";
+        this.open_sidebar = false;
+        this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
+        this.checkProfileStatus();
+      }
     },
   },
   computed: {
