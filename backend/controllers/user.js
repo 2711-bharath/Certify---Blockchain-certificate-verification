@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const shortid = require("shortid");
+const _ = require("lodash");
 
 const loginController = async (req, res, next) => {
   try {
@@ -103,9 +104,27 @@ const getUserController = async (req, res, next) => {
   }
 };
 
+const getUsersController = async (req, res, next) => {
+  try {
+    let users = await User.find({ "profile.name": { $exists: true } });
+    const users_obj = _.mapValues(_.keyBy(users, "uid"), (val) => {
+      return {
+        ...val.profile,
+        type: val.type,
+        uid: val.uid,
+      };
+    });
+    return res.send({ result: true, users: users_obj });
+  } catch (err) {
+    console.log("Error occurred", err);
+    return res.send({ result: false, users: null });
+  }
+};
+
 module.exports = {
   loginController,
   signupController,
   updateController,
   getUserController,
+  getUsersController,
 };

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!is_loading">
+  <div>
     <Header
       :show_sidebar="show_sidebar"
       :is_mobile="is_mobile"
@@ -16,6 +16,11 @@
         <router-view />
       </div>
     </div>
+    <b-loading
+      :is-full-page="true"
+      :active="$root.isLoading"
+      :can-cancel="false"
+    />
   </div>
 </template>
 
@@ -32,7 +37,6 @@ export default {
   },
   data() {
     return {
-      is_loading: false,
       show_sidebar: false,
       windowWidth: window.innerWidth,
       open_sidebar: false,
@@ -64,21 +68,21 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   async created() {
-    this.is_loading = true;
-    console.log(localStorage.getItem("user_id"));
+    this.$root.isLoading = true;
     if (
       Object.values(this.user).length === 0 &&
       localStorage.getItem("user_id")
     )
       await this.getUser({ userId: localStorage.getItem("user_id") });
+    await this.getUsers();
     document.title = this.$route.meta().title || "Certify";
     this.checkProfileStatus();
     this.show_sidebar = this.$route.meta().show_sidebar;
-    this.is_loading = false;
+    this.$root.isLoading = false;
   },
   methods: {
     ...mapMutations(["setWidth"]),
-    ...mapActions(["getUser"]),
+    ...mapActions(["getUser", "getUsers"]),
     onResize() {
       this.windowWidth = window.innerWidth;
       this.setWidth(this.windowWidth);

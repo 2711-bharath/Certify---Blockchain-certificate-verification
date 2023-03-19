@@ -112,9 +112,7 @@ const getCertificates = async (req, res, next) => {
     let certificates = [];
     if (status === "shared")
       certificates = await Certificate.find({
-        sharedWith: {
-          $elemMatch: { user_id: uid },
-        },
+        sharedWith: { $in: [uid] },
       });
     else if (status === "deleted")
       certificates = await Certificate.find({

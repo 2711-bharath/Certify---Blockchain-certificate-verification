@@ -3,12 +3,14 @@ import apiService from "../../apis/service";
 
 const state = {
   userData: {},
+  users: {},
   isLoggedIn: Boolean(localStorage.getItem("user")),
   width: window.innerWidth,
 };
 
 const getters = {
   user: (state) => state.userData,
+  users: (state) => state.users,
   isLoggedIn: (state) => state.isLoggedIn,
   getWidth: (state) => state.width,
 };
@@ -20,6 +22,11 @@ const actions = {
     commit("setLoggedIn", true);
   },
 
+  async getUsers({ commit }) {
+    const data = await apiService.get(`/user`);
+    commit("setUsers", data.users);
+  },
+
   async updateUser({ commit }, { uid, profile }) {
     const data = await apiService.put("/user/update", {
       uid,
@@ -27,7 +34,6 @@ const actions = {
     });
     commit("setUser", data.user);
   },
-
 
   // eslint-disable-next-line no-empty-pattern
   setLocalState({ commit }, { userId }) {
@@ -46,6 +52,9 @@ const actions = {
 const mutations = {
   setUser: (state, user) => {
     state.userData = user;
+  },
+  setUsers: (state, user) => {
+    state.users = user;
   },
   setLoggedIn: (state, isLoggedIn) => {
     state.isLoggedIn = isLoggedIn;

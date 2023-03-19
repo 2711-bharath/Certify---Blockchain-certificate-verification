@@ -159,14 +159,13 @@ export default {
       this.is_loading = false;
     },
     async uploadFile(file, user) {
-      const filePath = `users/${user.uid}/attachments/${file.name}`;
+      const filePath = `users/${user.uid}/attachments/${this.form.file.name}`;
 
       const storageRef = storage.ref(filePath);
 
       try {
-        const res = await storageRef.put(file.data);
+        const res = await storageRef.put(file);
         const url = await res.ref.getDownloadURL();
-        console.log(url);
         return String(url);
       } catch (err) {
         console.log(err.message);
