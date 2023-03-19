@@ -131,11 +131,15 @@ func MineBlock(c *fiber.Ctx) error {
 		db.MI.DB.Collection("blocks").UpdateOne(context.TODO(), filter, set)
 		if err != nil {
 			log.Fatal(err)
-			return c.JSON(struct{ success bool }{success: false})
+			return c.JSON(fiber.Map{"success": false})
 		}
-		return c.JSON(struct{ success bool }{success: true})
+		return c.JSON(fiber.Map{"success": true})
 	} else {
-		fmt.Println("invalid nonce value")
+		fmt.Println(
+			fiber.Map{
+				"success": false,
+				"message": "invalid nonce value",
+			})
 	}
 	return c.JSON("MineBLock")
 }

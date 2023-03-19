@@ -104,7 +104,16 @@ const updateCertificate = async (req, res, next) => {
     });
 };
 
-const mineBlock = async (req, res, next) => { };
+const mineBlock = async (req, res, next) => {
+    const { prevBlock, currBlock, nonce } = req.body;
+    let reqBody = {
+        block_uid: currBlock,
+        prev_block: prevBlock,
+        nonce: nonce
+    };
+    let response = await axios.post("http://localhost:8080/api/v1/mineBlock", reqBody);
+    return res.send(response.data);
+};
 
 const getCertificates = async (req, res, next) => {
     try {
