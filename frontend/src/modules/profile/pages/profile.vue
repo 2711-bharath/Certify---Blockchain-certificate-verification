@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <div class="mb-3">Profile</div>
-    <Profile :user="user" />
+    <Profile :user="user" v-if="user.uid" />
   </div>
 </template>
 
@@ -17,9 +17,13 @@ export default {
   computed: mapGetters(["user"]),
   methods: {
     async updateProfile(profile) {
-      const data = await apiService.patch("/user/update", { profile });
-      if (data.result) {
-        this.setUser(data.user);
+      try {
+        const data = await apiService.patch("/user/update", { profile });
+        if (data.result) {
+          this.setUser(data.user);
+        }
+      } catch (err) {
+        console.log("🚀 ~ file: profile.vue:27 ~ updateProfile ~ err:", err);
       }
     },
   },
