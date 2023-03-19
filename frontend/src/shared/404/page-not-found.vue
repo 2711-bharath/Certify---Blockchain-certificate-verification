@@ -15,25 +15,25 @@
 </template>
 
 <style lang="scss" scoped>
-  .page-not-found {
-    .img img {
-      width: 570px;
+.page-not-found {
+  .img img {
+    width: 420px;
+  }
+
+  .error {
+    h5 {
+      font-size: 38px;
+      font-weight: 500;
+    }
+    p {
+      font-size: 18px;
     }
 
-    .error {
-      h5 {
-        font-size: 38px;
-        font-weight: 500;
-      }
-      p {
-        font-size: 18px;
-      }
-
-      .button {
-        background-color: #ffb000;
-        color: #fff;
-        padding: 8px 40px;
-      }
+    .button {
+      background-color: #ffb000;
+      color: #fff;
+      padding: 8px 40px;
     }
   }
+}
 </style>

@@ -99,12 +99,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isLoggedIn = Boolean(localStorage.getItem("user"));
+  const isLoggedIn = Boolean(localStorage.getItem("user_id"));
   if (isLoggedIn) {
     if (to.name === "login" || to.name === "signup") next("/files");
     else next();
-  } else if (["certificates"].includes(to.name)) {
-    next("/sign-up");
+  } else if (["files", "deleted", "shared", "profile"].includes(to.name)) {
+    next("/login");
   } else {
     next();
   }

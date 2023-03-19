@@ -9,11 +9,16 @@ $grey: #fafafa;
 	box-sizing: border-box;
 }
 
+html {
+	overflow: hidden;
+}
+
 body {
 	font-family: "DM Sans", sans-serif;
 	line-height: 1.5;
 	background-color: #f1f3fb;
     min-height: 100vh;
+	overflow: auto;
 }
 
 .modal-close {
