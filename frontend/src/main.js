@@ -1,8 +1,5 @@
 import "vue-toast-notification/dist/theme-sugar.css";
 import Vue from "vue";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vClickOutside from "v-click-outside";
 
 import "buefy/dist/buefy.css";
@@ -41,6 +38,14 @@ import "./utils/styles/global.scss";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "viewerjs/dist/viewer.css";
 
+// Global is loading variable
+Vue.mixin({
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+});
 Vue.use(VueViewer);
 Vue.use(Dropdown);
 Vue.use(Modal);
@@ -70,9 +75,6 @@ Vue.use(VueToast, {
   position: "top",
   duration: 4500,
 });
-
-library.add(fas);
-Vue.component("font-aws-icon", FontAwesomeIcon);
 
 new Vue({
   router,

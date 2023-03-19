@@ -18,17 +18,12 @@ export default {
     Table,
   },
   async created() {
-    this.is_loading = true;
+    this.$root.isLoading = true;
     await this.getCertificates({
       userId: localStorage.getItem("user_id"),
       status: "shared",
     });
-    this.is_loading = false;
-  },
-  data() {
-    return {
-      is_loading: false,
-    };
+    this.$root.isLoading = false;
   },
   computed: mapGetters(["certificates"]),
   methods: {

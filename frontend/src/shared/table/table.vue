@@ -19,79 +19,95 @@
         v-for="certificate in data"
         :key="certificate.uid"
       >
-        <div class="column is-half">
-          <i
-            class="fal is-size-5 mr-1 mt-1"
-            :class="[
-              certificate.file.type.includes('pdf')
-                ? 'fa-file-pdf has-text-danger'
-                : 'fa-file-image has-text-info',
-            ]"
-          ></i>
-          {{ certificate.name }}
-        </div>
-        <div class="column" v-if="getWidth > 770">
-          {{ getOwner(certificate.userUid) }}
-        </div>
-        <div class="column" v-if="getWidth > 770">
-          {{ getFormattedDate(certificate.file.lastModifiedDate) }}
-        </div>
-        <div class="column" v-if="getWidth > 770">
-          {{ getFileSize(certificate.file.size) }}
-        </div>
-        <div class="column is-menu" v-if="getWidth > 770">
-          <div
-            class="dropdown is-right"
-            :class="{ 'is-active': show_menu === certificate.uid }"
-          >
-            <div class="dropdown-trigger">
-              <button
-                class="is-menu-btn"
-                aria-haspopup="true"
-                @click="show_menu = certificate.uid"
-              >
-                <i class="far fa-ellipsis-v"></i>
-              </button>
-            </div>
+        <template v-if="certificate.file">
+          <div class="column is-half" @click="viewCertificate(certificate)">
+            <i
+              class="fal is-size-5 mr-1"
+              :class="[
+                certificate.file.type.includes('pdf')
+                  ? 'fa-file-pdf has-text-danger'
+                  : 'fa-file-image has-text-info',
+              ]"
+            ></i>
+            {{ certificate.name }}
+          </div>
+          <div class="column" v-if="getWidth > 770">
+            {{ getOwner(certificate.userUid) }}
+          </div>
+          <div class="column" v-if="getWidth > 770">
+            {{ getFormattedDate(certificate.file.lastModifiedDate) }}
+          </div>
+          <div class="column" v-if="getWidth > 770">
+            {{ getFileSize(certificate.file.size) }}
+          </div>
+          <div class="column is-menu" v-if="getWidth > 770">
             <div
-              class="dropdown-menu"
-              role="menu"
-              v-if="show_menu === certificate.uid"
-              v-click-outside="() => (show_menu = '')"
+              class="dropdown is-right"
+              :class="{ 'is-active': show_menu === certificate.uid }"
             >
-              <div class="dropdown-content">
-                <a class="dropdown-item"><i class="far fa-eye"></i> View</a>
-                <a :href="certificate.URL" class="dropdown-item">
-                  <i class="far fa-download"></i> Download
-                </a>
-                <a class="dropdown-item">
-                  <i class="far fa-share-alt"></i> Share
-                </a>
-                <a
-                  class="dropdown-item"
-                  v-if="$route.name === 'files'"
-                  @click.stop="certificateStatus(certificate, true)"
+              <div class="dropdown-trigger">
+                <button
+                  class="is-menu-btn"
+                  aria-haspopup="true"
+                  @click="show_menu = certificate.uid"
                 >
-                  <i class="far fa-trash"></i> Delete
-                </a>
-                <a
-                  class="dropdown-item"
-                  v-if="$route.name === 'deleted'"
-                  @click.stop="certificateStatus(certificate, false)"
-                >
-                  <i class="far fa-undo"></i> Restore
-                </a>
+                  <i class="far fa-ellipsis-v"></i>
+                </button>
+              </div>
+              <div
+                class="dropdown-menu"
+                role="menu"
+                v-if="show_menu === certificate.uid"
+                v-click-outside="() => (show_menu = '')"
+              >
+                <div class="dropdown-content">
+                  <a
+                    class="dropdown-item"
+                    @click.stop="viewCertificate(certificate)"
+                    ><i class="far fa-eye"></i> View</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    @click.stop="downloadFile(certificate)"
+                  >
+                    <i class="far fa-download"></i> Download
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    v-if="$route.name !== 'deleted'"
+                    @click.stop="openSharePopup(certificate)"
+                  >
+                    <i class="far fa-share-alt"></i> Share
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    v-if="$route.name === 'files'"
+                    @click.stop="certificateStatus(certificate, true)"
+                  >
+                    <i class="far fa-trash"></i> Delete
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    v-if="$route.name === 'deleted'"
+                    @click.stop="certificateStatus(certificate, false)"
+                  >
+                    <i class="far fa-undo"></i> Restore
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
+import FileViewer from "./file-viewer.vue";
+import SharePopup from "./share-popup.vue";
 
 export default {
   props: {
@@ -106,7 +122,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getWidth"]),
+    ...mapGetters(["getWidth", "users"]),
   },
   methods: {
     ...mapActions(["updateCertificate"]),
@@ -125,6 +141,7 @@ export default {
     },
     getOwner(uid) {
       if (uid === localStorage.getItem("user_id")) return "me";
+      if (this.users[uid]) return this.users[uid].name;
       return "-";
     },
     getFormattedDate(date) {
@@ -135,14 +152,88 @@ export default {
       });
     },
     async certificateStatus(certificate, deleted = true) {
+      this.$root.isLoading = true;
+
       const body = certificate;
       try {
         body.isDeleted = deleted;
         body.file.lastModifiedDate = new Date();
-        await this.updateCertificate({ body });
+        const certificates = this.data.filter(
+          (val) => val.uid !== certificate.uid
+        );
+        await this.updateCertificate({ body, certificates });
       } catch (err) {
         console.log("🚀 ~ file: my-files.vue:62 ~ delete ~ err:", err);
       }
+      this.$root.isLoading = false;
+    },
+    viewCertificate(certificate) {
+      this.$buefy.modal.open({
+        component: FileViewer,
+        props: {
+          certificate,
+        },
+        fullScreen: true,
+        customClass: "no-close-btn",
+        parent: this,
+        width: "100vw",
+        events: {
+          addCertificate: (file) => {
+            this.setCertificates([...this.certificates, file]);
+          },
+        },
+      });
+    },
+    openSharePopup(certificate) {
+      this.$buefy.modal.open({
+        component: SharePopup,
+        props: {
+          certificate,
+        },
+        parent: this,
+        width: "480px",
+        events: {
+          share: async (userIds) => {
+            this.$root.isLoading = true;
+
+            const body = certificate;
+            try {
+              body.sharedWith = userIds;
+              body.file.lastModifiedDate = new Date();
+              const certificates = [
+                body,
+                ...this.data.filter((val) => val.uid !== certificate.uid),
+              ];
+
+              await this.updateCertificate({ body, certificates });
+            } catch (err) {
+              console.log("🚀 ~ file: table.vue:195 ~ share: ~ err:", err);
+            }
+            this.$root.isLoading = false;
+          },
+        },
+      });
+    },
+    async downloadFile(certificate) {
+      this.$root.isLoading = true;
+      try {
+        const response = await axios.get(certificate.URL, {
+          responseType: "blob",
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute(
+          "download",
+          `${certificate.name}.${certificate.file.type.split("/")[1]}`
+        );
+        document.body.appendChild(link);
+        link.click();
+      } catch (error) {
+        console.error(error);
+      }
+      console.log(this.$root.isLoading);
+      this.$root.isLoading = false;
     },
   },
 };
@@ -197,6 +288,15 @@ export default {
     cursor: pointer;
     &:hover {
       background-color: #dadce0;
+    }
+  }
+}
+</style>
+<style lang="scss">
+::v-deep {
+  .no-close-btn {
+    .is-large.modal-close {
+      opacity: 0;
     }
   }
 }

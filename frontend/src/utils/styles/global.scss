@@ -16,6 +16,10 @@ body {
     min-height: 100vh;
 }
 
+.modal-close {
+	display: none !important;
+}
+
 .v-toast__item  {
 	min-height: 2rem;
 	.v-toast__icon {
