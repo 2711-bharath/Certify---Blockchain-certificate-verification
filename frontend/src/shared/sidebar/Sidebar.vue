@@ -127,7 +127,7 @@ export default {
   box-sizing: border-box;
 
   padding: 0.5rem 0.75rem 0.5rem 0rem;
-
+  border-top-right-radius: 10px;
   background-color: #fff;
 
   & > ul > li {

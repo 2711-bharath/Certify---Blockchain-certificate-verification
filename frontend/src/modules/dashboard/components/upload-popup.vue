@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     async saveCertificate() {
-      this.is_loading = true;
+      this.$root.isLoading = true;
       try {
         this.form.userUid = this.user.uid;
         this.form.url = await this.uploadFile(this.form.file, {
@@ -156,7 +156,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      this.is_loading = false;
+      this.$root.isLoading = false;
     },
     async uploadFile(file, user) {
       const filePath = `users/${user.uid}/attachments/${this.form.file.name}`;
