@@ -28,6 +28,8 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import Header from "./shared/header/Header.vue";
 import Sidebar from "./shared/sidebar/Sidebar.vue";
+import apiService from "./apis/service";
+import FileViewer from "./shared/table/file-viewer.vue";
 
 export default {
   name: "App",
@@ -43,13 +45,9 @@ export default {
     };
   },
   watch: {
-    $route(to) {
-      console.log(to);
+    async $route(to) {
       if (to) {
-        document.title = to.meta().title || "Certify";
-        this.open_sidebar = false;
-        this.show_sidebar = this.$route.meta().show_sidebar || this.is_mobile;
-        this.checkProfileStatus();
+        await this.init(to);
       }
     },
   },
@@ -78,10 +76,7 @@ export default {
     )
       await this.getUser({ userId: localStorage.getItem("user_id") });
     await this.getUsers();
-    document.title = this.$route.meta().title || "Certify";
-    this.checkProfileStatus();
-    this.show_sidebar = this.$route.meta().show_sidebar;
-    this.$root.isLoading = false;
+    await this.init(this.$route);
   },
   methods: {
     ...mapMutations(["setWidth"]),
@@ -94,6 +89,35 @@ export default {
       if (this.profile_not_updated)
         if (this.$route.name !== "home") this.$router.push({ name: "profile" });
     },
+    async init(route) {
+      this.$root.isLoading = false;
+      document.title = route.meta().title || "Certify";
+      this.checkProfileStatus();
+      this.open_sidebar = false;
+      this.show_sidebar = route.meta().show_sidebar || this.is_mobile;
+      if (route.name === "certificate") {
+        const { certificate } = await apiService.get(
+          `/certificate/${route.params.uid}`
+        );
+        if (certificate)
+          this.$buefy.modal.open({
+            component: FileViewer,
+            props: {
+              certificate,
+            },
+            fullScreen: true,
+            customClass: "no-close-btn",
+            parent: this,
+            width: "100vw",
+            events: {
+              close: () => {
+                this.$router.push({ name: "home" });
+              },
+            },
+          });
+      }
+      this.$root.isLoading = false;
+    },
   },
 };
 </script>
@@ -101,5 +125,8 @@ export default {
 <style lang="scss" scoped>
 .main {
   position: relative;
+}
+.columns {
+  margin: 0px;
 }
 </style>

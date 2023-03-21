@@ -150,6 +150,33 @@ const getCertificates = async (req, res, next) => {
   }
 };
 
+const getCertificate = async (req, res, next) => {
+  try {
+    const { uid } = req.params;
+    let certificate = await Certificate.find({
+      uid: uid,
+      isDeleted: false,
+    });
+    if (certificate.length)
+      return res.send({
+        result: true,
+        certificate: certificate[0],
+      });
+    return res.send({
+      result: true,
+      certificate: null,
+      message: "Certificate not exists",
+    });
+  } catch (err) {
+    console.log("Error occurred", err);
+    return res.send({
+      result: false,
+      certificate: null,
+      message: "Error occurred",
+    });
+  }
+};
+
 const getblockDataForMining = async (req, res, next) => {
   console.log("here");
   let blockId = req.params.id;
@@ -172,4 +199,5 @@ module.exports = {
   mineBlock,
   getCertificates,
   getblockDataForMining,
+  getCertificate,
 };

@@ -177,11 +177,6 @@ export default {
         customClass: "no-close-btn",
         parent: this,
         width: "100vw",
-        events: {
-          addCertificate: (file) => {
-            this.setCertificates([...this.certificates, file]);
-          },
-        },
       });
     },
     openSharePopup(certificate) {

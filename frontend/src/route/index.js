@@ -43,6 +43,15 @@ const routes = [
     }),
   },
   {
+    path: "/certificate/:uid",
+    name: "certificate",
+    component: LandingPage,
+    meta: () => ({
+      title: "Certificate",
+      show_sidebar: false,
+    }),
+  },
+  {
     path: "/files",
     name: "files",
     component: Files,

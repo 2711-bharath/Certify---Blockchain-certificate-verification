@@ -5,10 +5,12 @@ const {
   getCertificates,
   mineBlock,
   getblockDataForMining,
+  getCertificate,
 } = require("../controllers/certificateController");
 
 const router = express.Router();
 
+router.get("/:uid", getCertificate);
 router.post("/", addCertificate);
 router.patch("/", updateCertificate);
 router.get("/getCertificateData/:id", getblockDataForMining);

@@ -35,7 +35,9 @@
       <div v-for="(value, key) in users" :key="key" style="width: 100%">
         <label
           class="user-field px-4 py-1"
-          v-if="filter(value) && certificate.userUid !== key"
+          v-if="
+            filter(value) && certificate.userUid !== key && user.uid !== key
+          "
         >
           <div>
             <div class="is-size-7 has-text-grey">
@@ -50,7 +52,13 @@
       </div>
     </div>
     <div class="share-popup--footer px-4 py-2">
-      <button class="button is-primary is-outlined">Copy link</button>
+      <button
+        class="button is-primary is-outlined"
+        :id="copyBtnId"
+        @click="copyLinkClipBoard()"
+      >
+        Copy link
+      </button>
       <div>
         <button class="button is-outlined mx-3" @click="$emit('close')">
           Cancel
@@ -65,6 +73,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Clipboard from "clipboard";
 
 export default {
   props: {
@@ -83,12 +92,45 @@ export default {
   },
   computed: {
     ...mapGetters(["users", "user"]),
+    copyBtnId() {
+      return `copyBtn_${Math.random().toString(36).substr(2, 9)}`;
+    },
+    baseUrl() {
+      return window.location.origin;
+    },
   },
   methods: {
     filter(val) {
       if (val.name.includes(this.search)) return true;
       if (val.email.includes(this.search)) return true;
       return false;
+    },
+    copyLinkClipBoard() {
+      this.$nextTick(() => {
+        const text = `${this.baseUrl}/certificate/${this.certificate.uid}`;
+        const clipboard = new Clipboard(`#${this.copyBtnId}`, {
+          text: () => text,
+        });
+
+        clipboard.on("success", () => {
+          this.$toast.open({
+            message: `Link copied to clipboard`,
+            type: "success",
+          });
+          clipboard.destroy();
+        });
+
+        clipboard.on("error", () => {
+          this.$toast.open({
+            message: `Failed to copy link copied to clipboard`,
+            type: "error",
+          });
+          clipboard.destroy();
+        });
+
+        const copyBtn = document.getElementById(this.copyBtnId);
+        clipboard.onClick({ target: copyBtn });
+      });
     },
   },
 };
