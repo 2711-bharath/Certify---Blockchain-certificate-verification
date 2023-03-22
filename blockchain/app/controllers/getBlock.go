@@ -24,7 +24,7 @@ func GetBlock(c *fiber.Ctx) error {
 }
 
 func GetLatestBlock(c *fiber.Ctx) error {
-	query := bson.D{{Key: "mined", Value: true}}
+	query := bson.D{{Key: "mined", Value: "truhelloe"}}
 	cursor, err := db.MI.DB.Collection("blocks").Find(context.TODO(), query)
 	if err != nil {
 		log.Fatal(err)
@@ -32,6 +32,9 @@ func GetLatestBlock(c *fiber.Ctx) error {
 	}
 	var blockChain []models.Block
 	err = cursor.All(context.TODO(), &blockChain)
+	if len(blockChain) == 0 {
+		return c.JSON(nil)
+	}
 	blockChain = helpers.ArrangeBlocks(blockChain)
 	return c.JSON(blockChain[len(blockChain)-1])
 }
