@@ -58,7 +58,7 @@
           </router-link>
         </li>
         <li @click="removeLocalState()">
-          <router-link to="/" active-class="is-active" exact>
+          <router-link to="" exact>
             <i class="far fa-sign-out-alt"></i> Logout
           </router-link>
         </li>

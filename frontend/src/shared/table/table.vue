@@ -63,9 +63,17 @@
                 <div class="dropdown-content">
                   <a
                     class="dropdown-item"
-                    @click.stop="viewCertificate(certificate)"
-                    ><i class="far fa-eye"></i> View</a
+                    v-if="user.type === 'university' && !certificate.mined"
+                    @click.stop="mineCertificate(certificate)"
                   >
+                    <i class="far fa-badge-check"></i> Mine
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    @click.stop="viewCertificate(certificate)"
+                  >
+                    <i class="far fa-eye"></i> View
+                  </a>
                   <a
                     class="dropdown-item"
                     @click.stop="downloadFile(certificate)"
@@ -108,6 +116,7 @@ import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 import FileViewer from "./file-viewer.vue";
 import SharePopup from "./share-popup.vue";
+import MineBlock from "./mine-block.vue";
 
 export default {
   props: {
@@ -122,7 +131,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getWidth", "users"]),
+    ...mapGetters(["getWidth", "users", "user"]),
   },
   methods: {
     ...mapActions(["updateCertificate"]),
@@ -227,8 +236,17 @@ export default {
       } catch (error) {
         console.error(error);
       }
-      console.log(this.$root.isLoading);
       this.$root.isLoading = false;
+    },
+    mineCertificate(certificate) {
+      this.$buefy.modal.open({
+        component: MineBlock,
+        props: {
+          certificate,
+        },
+        parent: this,
+        width: "480px",
+      });
     },
   },
 };
