@@ -5,7 +5,7 @@ import "math/big"
 type Block struct {
 	BlockId       string `json:"blockid"`
 	HashedData    []byte `json:"hashed_data"`
-	CertificateId string `json:"data"`
+	CertificateId string `json:"certificateid"`
 	ImageUrl      string
 	Owner         string
 	PrevHash      []byte `json:"prevhash"`

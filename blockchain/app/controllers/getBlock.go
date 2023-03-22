@@ -13,7 +13,7 @@ import (
 
 func GetBlock(c *fiber.Ctx) error {
 	blockid := c.Params("blockid")
-	query := bson.D{{Key: "blockid", Value: blockid}}
+	query := bson.D{{Key: "certificateid", Value: blockid}}
 	cursor := db.MI.DB.Collection("blocks").FindOne(context.TODO(), query)
 	var block models.Block
 	if err := cursor.Decode(&block); err != nil {
