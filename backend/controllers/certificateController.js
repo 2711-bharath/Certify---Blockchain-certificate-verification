@@ -115,6 +115,9 @@ const mineBlock = async (req, res, next) => {
         "http://localhost:8080/api/v1/mineBlock",
         reqBody
     );
+    if (response.data.success) {
+        await Certificate.updateOne({ uid: _.get(response, ['data', 'certificateid']) }, { $set: { mined: true } })
+    }
     return res.send(response.data);
 };
 

@@ -24,7 +24,7 @@ func GetBlock(c *fiber.Ctx) error {
 }
 
 func GetLatestBlock(c *fiber.Ctx) error {
-	query := bson.D{{Key: "mined", Value: "truhelloe"}}
+	query := bson.D{{Key: "mined", Value: true}}
 	cursor, err := db.MI.DB.Collection("blocks").Find(context.TODO(), query)
 	if err != nil {
 		log.Fatal(err)

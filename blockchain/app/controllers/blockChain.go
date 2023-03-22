@@ -133,7 +133,7 @@ func MineBlock(c *fiber.Ctx) error {
 			log.Fatal(err)
 			return c.JSON(fiber.Map{"success": false})
 		}
-		return c.JSON(fiber.Map{"success": true})
+		return c.JSON(fiber.Map{"success": true, "certificateid": block.CertificateId})
 	} else {
 		fmt.Println(
 			fiber.Map{
