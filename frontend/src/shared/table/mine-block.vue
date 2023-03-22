@@ -22,19 +22,19 @@
           </div>
         </div>
         <div class="columns">
-          <div class="column">Block Id:</div>
+          <div class="column is-one-fifth">Block Id:</div>
           <div class="column">{{ block_data.block.blockid }}</div>
         </div>
         <div class="columns">
-          <div class="column">Hashed Data:</div>
+          <div class="column is-one-fifth">Hashed Data:</div>
           <div class="column">{{ block_data.block.hashed_data || "null" }}</div>
         </div>
         <div class="columns">
-          <div class="column">Image Hash:</div>
+          <div class="column is-one-fifth">Images Hash:</div>
           <div class="column">{{ block_data.block.image_hash || "null" }}</div>
         </div>
         <div class="columns">
-          <div class="column">Previous Hash:</div>
+          <div class="column is-one-fifth">Previous Hash:</div>
           <div class="column">
             {{ (block_data.lastBlock && block_data.lastBlock.hash) || "null" }}
           </div>

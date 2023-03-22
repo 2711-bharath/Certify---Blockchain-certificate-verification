@@ -3,7 +3,7 @@
     <div class="file-viewer--header">
       <div class="is-size-3 name__header">
         <div>
-          <span class="is-size-5" v-if="certificate.isMined">
+          <span class="is-size-5" v-if="certificate.mined">
             <b-tooltip label="verified" type="is-dark" position="is-bottom">
               <i class="far fa-badge-check has-text-success mr-1"></i>
             </b-tooltip>
@@ -31,11 +31,9 @@
         <div class="is-size-4 has-text-centered mb-3">Certificate Details</div>
         <div
           class="is-size-6 mb-3 has-text-success"
-          :class="[
-            certificate.isMined ? 'has-text-success' : 'has-text-danger',
-          ]"
+          :class="[certificate.mined ? 'has-text-success' : 'has-text-danger']"
         >
-          <template v-if="certificate.isMined">
+          <template v-if="certificate.mined">
             <i class="far fa-badge-check mr-1 ga-lg"></i> Verified
           </template>
           <template v-else>
