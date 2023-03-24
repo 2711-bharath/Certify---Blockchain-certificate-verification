@@ -16,57 +16,74 @@
             <i class="far fa-browser"></i> Home
           </router-link>
         </li>
-        <li>
-          <router-link to="/profile" active-class="is-active" exact>
-            <i class="far fa-user-circle"></i> Profile
-            <sup
-              class="p-1 ml-1 is-rounded has-background-danger"
-              style="border-radius: 50%"
-              v-if="$parent.profile_not_updated"
+        <template v-if="$parent.isLoggedIn">
+          <li>
+            <router-link to="/profile" active-class="is-active" exact>
+              <i class="far fa-user-circle"></i> Profile
+              <sup
+                class="p-1 ml-1 is-rounded has-background-danger"
+                style="border-radius: 50%"
+                v-if="$parent.profile_not_updated"
+              >
+              </sup>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/files"
+              active-class="is-active"
+              :class="{ disabled: $parent.profile_not_updated }"
+              exact
             >
-            </sup>
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/files"
-            active-class="is-active"
-            :class="{ disabled: $parent.profile_not_updated }"
-            exact
+              <i class="far fa-file-certificate"></i> My Files
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/shared"
+              active-class="is-active"
+              :class="{ disabled: $parent.profile_not_updated }"
+              exact
+            >
+              <i class="far fa-share-alt"></i> Shared with me
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/bin"
+              active-class="is-active"
+              :class="{ disabled: $parent.profile_not_updated }"
+              exact
+            >
+              <i class="far fa-trash-alt"></i> Bin
+            </router-link>
+          </li>
+          <li
+            @click.stop="
+              removeLocalState();
+              $router.push('/');
+            "
           >
-            <i class="far fa-file-certificate"></i> My Files
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/shared"
-            active-class="is-active"
-            :class="{ disabled: $parent.profile_not_updated }"
-            exact
-          >
-            <i class="far fa-share-alt"></i> Shared with me
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/bin"
-            active-class="is-active"
-            :class="{ disabled: $parent.profile_not_updated }"
-            exact
-          >
-            <i class="far fa-trash-alt"></i> Bin
-          </router-link>
-        </li>
-        <li
-          @click.stop="
-            removeLocalState();
-            $router.push('/');
-          "
-        >
-          <router-link to="" exact>
-            <i class="far fa-sign-out-alt"></i> Logout
-          </router-link>
-        </li>
+            <router-link to="" exact>
+              <i class="far fa-sign-out-alt"></i> Logout
+            </router-link>
+          </li>
+        </template>
+        <template v-else>
+          <li>
+            <a href="/#about"> <i class="far fa-flag"></i> About </a>
+          </li>
+          <li>
+            <a href="/#services">
+              <i class="far fa-hands-helping"></i> Services
+            </a>
+          </li>
+          <li>
+            <a href="/#contact">
+              <i class="far fa-address-card"></i> contact
+            </a>
+          </li>
+        </template>
       </ul>
     </aside>
   </div>

@@ -22,53 +22,53 @@
 </template>
 
 <script>
-  export default {
-    computed: {
-      objectives() {
-        return [
-          "To maintain a trustworthy way of storing certificates data",
-          "To provide better and easy way of managing certificates",
-          "To prevent tampering of the certificates.",
-          "To provide a way for employers to verify certificates quicker.",
-          "To potentially develop a new currency CertiCoin.",
-        ];
-      },
+export default {
+  computed: {
+    objectives() {
+      return [
+        "To maintain a trustworthy way of storing certificates data",
+        "To provide better and easy way of managing certificates",
+        "To prevent tampering of the certificates.",
+        "To provide a way for employers to verify certificates quicker.",
+        // "To potentially develop a new currency CertiCoin.",
+      ];
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .about {
-    .description {
-      font-size: 20px;
-      margin: 0 auto;
-      text-align: center;
-      min-width: 388px;
-      max-width: 450px;
-    }
-    .objectives {
-      font-size: 28px;
-      font-weight: 500;
-    }
-    .item-icon .fal {
-      font-size: 110px;
+.about {
+  .description {
+    font-size: 20px;
+    margin: 0 auto;
+    text-align: center;
+    min-width: 388px;
+    max-width: 450px;
+  }
+  .objectives {
+    font-size: 28px;
+    font-weight: 500;
+  }
+  .item-icon .fal {
+    font-size: 110px;
+    color: rgb(26, 218, 183);
+  }
+  .is-flex {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .item {
+    min-width: 350px;
+    font-size: 19px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    .far {
       color: rgb(26, 218, 183);
     }
-    .is-flex {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .item {
-      min-width: 350px;
-      font-size: 19px;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      .far {
-        color: rgb(26, 218, 183);
-      }
-    }
   }
+}
 </style>

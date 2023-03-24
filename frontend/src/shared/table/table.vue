@@ -113,7 +113,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import FileViewer from "./file-viewer.vue";
 import SharePopup from "./share-popup.vue";
 import MineBlock from "./mine-block.vue";
@@ -135,6 +135,7 @@ export default {
   },
   methods: {
     ...mapActions(["updateCertificate"]),
+    ...mapMutations(["setCertificates"]),
     getFileSize(size) {
       const fSExt = ["Bytes", "KB", "MB", "GB"];
       let i = 0;
@@ -250,6 +251,19 @@ export default {
         },
         parent: this,
         width: "480px",
+        events: {
+          update: (body) => {
+            console.log(
+              "🚀 ~ file: table.vue:263 ~ mineCertificate ~ body:",
+              body
+            );
+            const certificates = [
+              body,
+              ...this.data.filter((val) => val.uid !== certificate.uid),
+            ];
+            this.setCertificates(certificates);
+          },
+        },
       });
     },
   },

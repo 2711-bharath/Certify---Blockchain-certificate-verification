@@ -120,11 +120,26 @@ const mineBlock = async (req, res, next) => {
       { uid: _.get(response, ["data", "certificateid"]) },
       { $set: { mined: true } }
     );
-  }
-  // TODO: Mined successfull(message) ,result true , certificate
-  // TODO: Mined unsuccessfull(message) ,result false , certificate: null
-  // TODO: Already Mined(message) ,result false , certificate: null
-  return res.send(response.data);
+    const certificate = await Certificate.findOne({
+      uid: _.get(response, ["data", "certificateid"]),
+    }).lean();
+    res.status(202).send({
+      result: true,
+      certificate,
+      message: "Mined Successfully",
+    });
+  } else if (response.data.message)
+    res.status(200).send({
+      result: false,
+      certificate: null,
+      message: "invalid nonce value",
+    });
+  else
+    res.status(400).send({
+      result: false,
+      certificate: null,
+      message: "Error occurred",
+    });
 };
 
 const getCertificates = async (req, res, next) => {

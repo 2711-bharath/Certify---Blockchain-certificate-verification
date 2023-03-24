@@ -83,11 +83,12 @@ export default {
     async mineBlock() {
       this.$root.isLoading = true;
       try {
-        await apiService.post(`/certificate/mineBlock`, {
+        const data = await apiService.post(`/certificate/mineBlock`, {
           prevBlock: this.block_data?.lastBlock?.block_id || null,
           currBlock: this.block_data?.block?.blockid,
           nonce: this.nonce,
         });
+        if (data.certificate) this.$emit("update", data.certificate);
       } catch (err) {
         console.log("🚀 ~ file: mine-block.vue:70 ~ mineBlock ~ err:", err);
       }
