@@ -194,7 +194,7 @@ export default {
       });
     },
     openSharePopup(certificate) {
-      this.$buefy.modal.open({
+      const popup = this.$buefy.modal.open({
         component: SharePopup,
         props: {
           certificate,
@@ -218,6 +218,7 @@ export default {
             } catch (err) {
               console.log("🚀 ~ file: table.vue:195 ~ share: ~ err:", err);
             }
+            popup.close();
             this.$root.isLoading = false;
           },
         },

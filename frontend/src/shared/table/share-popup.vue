@@ -93,7 +93,7 @@ export default {
   computed: {
     ...mapGetters(["users", "user"]),
     copyBtnId() {
-      return `copyBtn_${Math.random().toString(36).substr(2, 9)}`;
+      return `copyBtn_${Math.random().toString(36).substring(2, 9)}`;
     },
     baseUrl() {
       return window.location.origin;
