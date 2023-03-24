@@ -78,16 +78,17 @@ export default {
     this.$root.isLoading = true;
     try {
       if (
-        Object.values(this.user).length === 0 &&
+        Object.values(this.user || {}).length === 0 &&
         localStorage.getItem("user_id")
-      )
+      ) {
         await this.getUser({ userId: localStorage.getItem("user_id") });
-      await this.getUsers();
+        await this.getUsers();
+      }
       await this.init(this.$route);
     } catch (err) {
       console.log("🚀 ~ file: App.vue:85 ~ created ~ err:", err);
     }
-    this.$root.isLoading = true;
+    this.$root.isLoading = false;
   },
   methods: {
     ...mapMutations(["setWidth"]),
