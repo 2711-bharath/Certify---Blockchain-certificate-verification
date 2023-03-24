@@ -57,7 +57,12 @@
             <i class="far fa-trash-alt"></i> Bin
           </router-link>
         </li>
-        <li @click="removeLocalState()">
+        <li
+          @click.stop="
+            removeLocalState();
+            $router.push('/');
+          "
+        >
           <router-link to="" exact>
             <i class="far fa-sign-out-alt"></i> Logout
           </router-link>

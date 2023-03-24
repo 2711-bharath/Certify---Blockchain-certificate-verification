@@ -177,6 +177,10 @@ export default {
       this.$root.isLoading = false;
     },
     viewCertificate(certificate) {
+      console.log(
+        "🚀 ~ file: table.vue:180 ~ viewCertificate ~ certificate:",
+        certificate
+      );
       this.$buefy.modal.open({
         component: FileViewer,
         props: {

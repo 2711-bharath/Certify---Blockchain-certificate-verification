@@ -82,8 +82,8 @@ export default {
         localStorage.getItem("user_id")
       ) {
         await this.getUser({ userId: localStorage.getItem("user_id") });
-        await this.getUsers();
       }
+      await this.getUsers();
       await this.init(this.$route);
     } catch (err) {
       console.log("🚀 ~ file: App.vue:85 ~ created ~ err:", err);
