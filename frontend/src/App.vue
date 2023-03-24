@@ -46,9 +46,15 @@ export default {
   },
   watch: {
     async $route(to) {
+      this.$root.isLoading = true;
       if (to) {
-        await this.init(to);
+        try {
+          await this.init(to);
+        } catch (err) {
+          console.log("🚀 ~ file: App.vue:54 ~ $route ~ err:", err);
+        }
       }
+      this.$root.isLoading = false;
     },
   },
   computed: {
@@ -70,13 +76,18 @@ export default {
   },
   async created() {
     this.$root.isLoading = true;
-    if (
-      Object.values(this.user).length === 0 &&
-      localStorage.getItem("user_id")
-    )
-      await this.getUser({ userId: localStorage.getItem("user_id") });
-    await this.getUsers();
-    await this.init(this.$route);
+    try {
+      if (
+        Object.values(this.user).length === 0 &&
+        localStorage.getItem("user_id")
+      )
+        await this.getUser({ userId: localStorage.getItem("user_id") });
+      await this.getUsers();
+      await this.init(this.$route);
+    } catch (err) {
+      console.log("🚀 ~ file: App.vue:85 ~ created ~ err:", err);
+    }
+    this.$root.isLoading = true;
   },
   methods: {
     ...mapMutations(["setWidth"]),
@@ -90,7 +101,6 @@ export default {
         if (this.$route.name !== "home") this.$router.push({ name: "profile" });
     },
     async init(route) {
-      this.$root.isLoading = false;
       document.title = route.meta().title || "Certify";
       this.checkProfileStatus();
       this.open_sidebar = false;
@@ -116,7 +126,6 @@ export default {
             },
           });
       }
-      this.$root.isLoading = false;
     },
   },
 };
