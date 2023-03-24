@@ -17,7 +17,7 @@ body {
 	font-family: "DM Sans", sans-serif;
 	line-height: 1.5;
 	background-color: #f1f3fb;
-	height: 100vh;
+	height: calc(100vh + 50px);
 	overflow-x: hidden;
 	overflow-y: auto;
 }
