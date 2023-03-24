@@ -1,10 +1,11 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://api.hackevolve.com",
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Set withCredentials to true
 });
 
 axiosInstance.interceptors.request.use(
