@@ -187,7 +187,7 @@ const getCertificate = async (req, res, next) => {
         certificate: certificate[0],
       });
     return res.send({
-      result: true,
+      result: false,
       certificate: null,
       message: "Certificate not exists",
     });

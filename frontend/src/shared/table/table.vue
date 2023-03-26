@@ -7,105 +7,160 @@
       </div>
     </div>
     <template v-else>
-      <div class="columns mt-3 reusable-table-header">
-        <div class="column is-half">Name</div>
-        <div class="column" v-if="getWidth > 770">Owner</div>
-        <div class="column" v-if="getWidth > 770">Last Modified</div>
-        <div class="column" v-if="getWidth > 770">File size</div>
-        <div class="column is-menu" v-if="getWidth > 770"></div>
-      </div>
       <div
-        class="columns reusable-table-row"
-        v-for="certificate in data"
-        :key="certificate.uid"
+        class="tabs is-toggle is-small mt-3 mb-0"
+        :style="{ marginLeft: '-0.75rem' }"
       >
-        <template v-if="certificate.file">
-          <div class="column is-half" @click="viewCertificate(certificate)">
-            <i
-              class="fal is-size-5 mr-1"
-              :class="[
-                certificate.file.type.includes('pdf')
-                  ? 'fa-file-pdf has-text-danger'
-                  : 'fa-file-image has-text-info',
-              ]"
-            ></i>
-            {{ certificate.name }}
-          </div>
-          <div class="column" v-if="getWidth > 770">
-            {{ getOwner(certificate.userUid) }}
-          </div>
-          <div class="column" v-if="getWidth > 770">
-            {{ getFormattedDate(certificate.file.lastModifiedDate) }}
-          </div>
-          <div class="column" v-if="getWidth > 770">
-            {{ getFileSize(certificate.file.size) }}
-          </div>
-          <div class="column is-menu" v-if="getWidth > 770">
-            <div
-              class="dropdown is-right"
-              :class="{ 'is-active': show_menu === certificate.uid }"
-            >
-              <div class="dropdown-trigger">
-                <button
-                  class="is-menu-btn"
-                  aria-haspopup="true"
-                  @click="show_menu = certificate.uid"
-                >
-                  <i class="far fa-ellipsis-v"></i>
-                </button>
-              </div>
+        <ul>
+          <li :class="{ 'is-active': view === 'list' }" @click="view = 'list'">
+            <a>
+              <span class="icon is-small">
+                <i class="far fa-list-ul"></i>
+              </span>
+              <p>List View</p>
+            </a>
+          </li>
+          <li :class="{ 'is-active': view === 'card' }" @click="view = 'card'">
+            <a>
+              <span class="icon is-small">
+                <i class="far fa-th-large"></i>
+              </span>
+              <p>Card View</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div v-if="view === 'list'">
+        <div class="columns mt-3 reusable-table-header">
+          <div class="column is-half">Name</div>
+          <div class="column" v-if="getWidth > 770">Owner</div>
+          <div class="column" v-if="getWidth > 770">Last Modified</div>
+          <div class="column" v-if="getWidth > 770">File size</div>
+          <div class="column is-menu" v-if="getWidth > 770"></div>
+        </div>
+        <div
+          class="columns reusable-table-row"
+          v-for="certificate in data"
+          :key="certificate.uid"
+        >
+          <template v-if="certificate.file">
+            <div class="column is-half" @click="viewCertificate(certificate)">
+              <i
+                class="fal is-size-5 mr-1"
+                :class="[
+                  certificate.file.type.includes('pdf')
+                    ? 'fa-file-pdf has-text-danger'
+                    : 'fa-file-image has-text-info',
+                ]"
+              ></i>
+              {{ certificate.name }}
+            </div>
+            <div class="column" v-if="getWidth > 770">
+              {{ getOwner(certificate.userUid) }}
+            </div>
+            <div class="column" v-if="getWidth > 770">
+              {{ getFormattedDate(certificate.file.lastModifiedDate) }}
+            </div>
+            <div class="column" v-if="getWidth > 770">
+              {{ getFileSize(certificate.file.size) }}
+            </div>
+            <div class="column is-menu" v-if="getWidth > 770">
               <div
-                class="dropdown-menu"
-                role="menu"
-                v-if="show_menu === certificate.uid"
-                v-click-outside="() => (show_menu = '')"
+                class="dropdown is-right"
+                :class="{ 'is-active': show_menu === certificate.uid }"
               >
-                <div class="dropdown-content">
-                  <a
-                    class="dropdown-item"
-                    v-if="user.type === 'university' && !certificate.mined"
-                    @click.stop="mineCertificate(certificate)"
+                <div class="dropdown-trigger">
+                  <button
+                    class="is-menu-btn"
+                    aria-haspopup="true"
+                    @click="show_menu = certificate.uid"
                   >
-                    <i class="far fa-badge-check"></i> Mine
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    @click.stop="viewCertificate(certificate)"
-                  >
-                    <i class="far fa-eye"></i> View
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    @click.stop="downloadFile(certificate)"
-                  >
-                    <i class="far fa-download"></i> Download
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    v-if="$route.name !== 'deleted'"
-                    @click.stop="openSharePopup(certificate)"
-                  >
-                    <i class="far fa-share-alt"></i> Share
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    v-if="$route.name === 'files'"
-                    @click.stop="certificateStatus(certificate, true)"
-                  >
-                    <i class="far fa-trash"></i> Delete
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    v-if="$route.name === 'deleted'"
-                    @click.stop="certificateStatus(certificate, false)"
-                  >
-                    <i class="far fa-undo"></i> Restore
-                  </a>
+                    <i class="far fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <div
+                  class="dropdown-menu"
+                  role="menu"
+                  v-if="show_menu === certificate.uid"
+                  v-click-outside="() => (show_menu = '')"
+                >
+                  <div class="dropdown-content">
+                    <a
+                      class="dropdown-item"
+                      v-if="user.type === 'university' && !certificate.mined"
+                      @click.stop="mineCertificate(certificate)"
+                    >
+                      <i class="far fa-badge-check"></i> Mine
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      @click.stop="viewCertificate(certificate)"
+                    >
+                      <i class="far fa-eye"></i> View
+                    </a>
+                    <a
+                      class="dropdown-item btn"
+                      v-if="$route.name !== 'deleted'"
+                      v-clipboard:copy="
+                        `${baseUrl}/certificate/${certificate.uid}`
+                      "
+                      v-clipboard:success="
+                        () =>
+                          $toast.open({
+                            message: `Link copied to clipboard`,
+                            type: 'success',
+                          })
+                      "
+                      v-clipboard:error="
+                        () =>
+                          $toast.open({
+                            message: `Failed to copy link copied to clipboard`,
+                            type: 'error',
+                          })
+                      "
+                    >
+                      <i class="far fa-clone"></i> Copy link
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      @click.stop="downloadFile(certificate)"
+                    >
+                      <i class="far fa-download"></i> Download
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      v-if="$route.name !== 'deleted'"
+                      @click.stop="openSharePopup(certificate)"
+                    >
+                      <i class="far fa-share-alt"></i> Share
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      v-if="$route.name !== 'deleted'"
+                      @click.stop="openQRPopup(certificate)"
+                    >
+                      <i class="far fa-qrcode"></i> QR Code
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      v-if="$route.name === 'files'"
+                      @click.stop="certificateStatus(certificate, true)"
+                    >
+                      <i class="far fa-trash"></i> Delete
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      v-if="$route.name === 'deleted'"
+                      @click.stop="certificateStatus(certificate, false)"
+                    >
+                      <i class="far fa-undo"></i> Restore
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </template>
+          </template>
+        </div>
       </div>
     </template>
   </div>
@@ -117,6 +172,7 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 import FileViewer from "./file-viewer.vue";
 import SharePopup from "./share-popup.vue";
 import MineBlock from "./mine-block.vue";
+import QrPopup from "./qr-popup.vue";
 
 export default {
   props: {
@@ -128,10 +184,14 @@ export default {
   data() {
     return {
       show_menu: "",
+      view: "list",
     };
   },
   computed: {
     ...mapGetters(["getWidth", "users", "user"]),
+    baseUrl() {
+      return window.location.origin;
+    },
   },
   methods: {
     ...mapActions(["updateCertificate"]),
@@ -191,6 +251,16 @@ export default {
         customClass: "no-close-btn",
         parent: this,
         width: "100vw",
+      });
+    },
+    openQRPopup(certificate) {
+      this.$buefy.modal.open({
+        component: QrPopup,
+        props: {
+          link: `${this.baseUrl}/certificate/${certificate.uid}`,
+        },
+        parent: this,
+        width: "300px",
       });
     },
     openSharePopup(certificate) {

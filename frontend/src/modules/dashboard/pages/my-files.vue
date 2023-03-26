@@ -13,26 +13,6 @@
         </button>
       </div>
     </div>
-    <div class="tabs is-toggle is-small mt-3 mb-0">
-      <ul>
-        <li :class="{ 'is-active': view === 'list' }" @click="view = 'list'">
-          <a>
-            <span class="icon is-small">
-              <i class="far fa-list-ul"></i>
-            </span>
-            <p>List View</p>
-          </a>
-        </li>
-        <li :class="{ 'is-active': view === 'card' }" @click="view = 'card'">
-          <a>
-            <span class="icon is-small">
-              <i class="far fa-th-large"></i>
-            </span>
-            <p>Card View</p>
-          </a>
-        </li>
-      </ul>
-    </div>
     <Table :data="certificates" />
   </div>
 </template>
@@ -53,11 +33,6 @@ export default {
       status: "none",
     });
     this.$root.isLoading = false;
-  },
-  data() {
-    return {
-      view: "list",
-    };
   },
   computed: mapGetters(["certificates"]),
   methods: {

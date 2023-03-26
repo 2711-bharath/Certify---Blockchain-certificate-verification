@@ -1,6 +1,7 @@
 import "vue-toast-notification/dist/theme-sugar.css";
 import Vue from "vue";
 import vClickOutside from "v-click-outside";
+import VueClipboard from 'vue-clipboard2'
 
 import "buefy/dist/buefy.css";
 
@@ -46,6 +47,7 @@ Vue.mixin({
     };
   },
 });
+Vue.use(VueClipboard)
 Vue.use(VueViewer);
 Vue.use(Dropdown);
 Vue.use(Modal);
