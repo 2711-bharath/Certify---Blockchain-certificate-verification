@@ -29,6 +29,13 @@
             </a>
           </li>
         </ul>
+        <div class="select is-normal">
+          <select v-model="filter_by">
+            <option :value="null">None</option>
+            <option :value="true">Mined</option>
+            <option :value="false">Not Mined</option>
+          </select>
+        </div>
       </div>
       <div v-if="view === 'list'">
         <div class="columns mt-3 reusable-table-header">
@@ -40,7 +47,7 @@
         </div>
         <div
           class="columns reusable-table-row"
-          v-for="certificate in data"
+          v-for="(certificate, index) in getData"
           :key="certificate.uid"
         >
           <template v-if="certificate.file">
@@ -67,7 +74,10 @@
             <div class="column is-menu" v-if="getWidth > 770">
               <div
                 class="dropdown is-right"
-                :class="{ 'is-active': show_menu === certificate.uid }"
+                :class="{
+                  'is-active': show_menu === certificate.uid,
+                  'is-up': index > 6,
+                }"
               >
                 <div class="dropdown-trigger">
                   <button
@@ -162,6 +172,14 @@
           </template>
         </div>
       </div>
+      <div v-else class="card-container pb-5">
+        <Card
+          v-for="certificate in getData"
+          :key="certificate.uid"
+          :certificate="certificate"
+          :user="user"
+        />
+      </div>
     </template>
   </div>
 </template>
@@ -173,8 +191,12 @@ import FileViewer from "./file-viewer.vue";
 import SharePopup from "./share-popup.vue";
 import MineBlock from "./mine-block.vue";
 import QrPopup from "./qr-popup.vue";
+import Card from "./card.vue";
 
 export default {
+  components: {
+    Card,
+  },
   props: {
     data: {
       type: Array,
@@ -185,12 +207,19 @@ export default {
     return {
       show_menu: "",
       view: "list",
+      filter_by: null,
     };
   },
   computed: {
     ...mapGetters(["getWidth", "users", "user"]),
     baseUrl() {
       return window.location.origin;
+    },
+    getData() {
+      if (this.filter_by === null) return this.data;
+      return this.data.filter(
+        (certificate) => certificate.mined === this.filter_by
+      );
     },
   },
   methods: {
@@ -392,6 +421,12 @@ export default {
       background-color: #dadce0;
     }
   }
+}
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 </style>
 <style lang="scss">
