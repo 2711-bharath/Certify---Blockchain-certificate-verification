@@ -84,7 +84,7 @@ export default {
       this.$root.isLoading = true;
       try {
         const data = await apiService.post(`/certificate/mineBlock`, {
-          prevBlock: this.block_data?.lastBlock?.block_id || null,
+          prevBlock: this.block_data?.lastBlock?.blockid || null,
           currBlock: this.block_data?.block?.blockid,
           nonce: this.nonce,
         });
