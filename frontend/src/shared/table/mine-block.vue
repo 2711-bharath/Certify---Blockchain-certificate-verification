@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import apiService from "../../apis/service";
 
 export default {
@@ -67,6 +68,12 @@ export default {
       block_data: null,
       nonce: 0,
     };
+  },
+  computed: {
+    ...mapGetters(["users", "user"]),
+    baseUrl() {
+      return window.location.origin;
+    },
   },
   async created() {
     this.$root.isLoading = true;
@@ -89,6 +96,18 @@ export default {
           nonce: this.nonce,
         });
         if (data.certificate) this.$emit("update", data.certificate);
+        const uid = this.certificate.userUid;
+        if (this.users[uid])
+          await apiService.post("/send-email", {
+            to: this.users[uid].email,
+            subject: `Certificate verified`,
+            html: `
+              Hi ${this.users[uid].name}, 
+              <p>Your certificate verified  ${this.certificate.name}</p>
+              <p>To view certificate <a href="http://localhost:9000/${this.certificate.uid}">click here</a></p>
+              <h4>Verified by ${this.user.profile.name}</h4>
+            `,
+          });
       } catch (err) {
         console.log("🚀 ~ file: mine-block.vue:70 ~ mineBlock ~ err:", err);
       }
