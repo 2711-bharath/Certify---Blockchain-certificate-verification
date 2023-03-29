@@ -36,18 +36,18 @@ export default {
         },
 
         {
-          name: "Tamper Resistance",
+          name: "Tamper Resistance & Trusted",
           description:
             "Immutability is perhaps the most important benefit a blockchain provides. This tamper resistance is highly effective in preventing the counterfeiting of documents and document fraud.",
           icon: "fal fa-file-check",
         },
 
-        {
-          name: "Trusted",
-          description:
-            "Building towards a society of trust, Certificates on Blockchain is obviously just the first necessary step. A public decentralized network encourages trust to a whole new level.",
-          icon: "fal fa-hands-helping",
-        },
+        // {
+        //   name: "",
+        //   description:
+        //     "Building towards a society of trust, Certificates on Blockchain is obviously just the first necessary step. A public decentralized network encourages trust to a whole new level.",
+        //   icon: "fal fa-hands-helping",
+        // },
 
         // {
         //   name: "Ease of Use",
@@ -56,24 +56,24 @@ export default {
         //   icon: "fal fa-person-carry",
         // },
 
-        {
-          name: "Distributed",
-          description:
-            "Lorem Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti on přežil i nástup elektronické sazby v podstatě beze změny. ",
-          icon: "fal fa-users-class",
-        },
+        // {
+        //   name: "Distributed",
+        //   description:
+        //     "Lorem Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti on přežil i nástup elektronické sazby v podstatě beze změny. ",
+        //   icon: "fal fa-users-class",
+        // },
 
-        {
-          name: "Preview before Publish",
-          description:
-            "Preview your certificate or document as many times as you want before we generate it. This will help you in visualising how it would look like in the final draft.",
-          icon: "fal fa-eye",
-        },
+        // {
+        //   name: "Preview before Publish",
+        //   description:
+        //     "Preview your certificate or document as many times as you want before we generate it. This will help you in visualising how it would look like in the final draft.",
+        //   icon: "fal fa-eye",
+        // },
 
         {
           name: "QR Support",
           description:
-            "Lorem Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti on přežil i nástup elektronické sazby v podstatě beze změny. ",
+            "It enables user to scan through QR code that is generated based on the certificate details which is unique for every certificate.",
           icon: "fal fa-qrcode",
         },
       ];

@@ -37,7 +37,7 @@
           </select>
         </div>
       </div>
-      <div v-if="view === 'list'">
+      <div v-if="view === 'list'" :style="{ paddingBottom: '2.5rem' }">
         <div class="columns mt-3 reusable-table-header">
           <div class="column is-half">Name</div>
           <div class="column" v-if="getWidth > 770">Owner</div>
