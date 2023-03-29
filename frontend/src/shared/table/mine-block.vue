@@ -104,7 +104,7 @@ export default {
             html: `
               Hi ${this.users[uid].name}, 
               <p>Your certificate verified  ${this.certificate.name}</p>
-              <p>To view certificate <a href="http://localhost:9000/${this.certificate.uid}">click here</a></p>
+              <p>To view certificate <a href="http://localhost:9000/certificate/${this.certificate.uid}">click here</a></p>
               <h4>Verified by ${this.user.profile.name}</h4>
             `,
           });

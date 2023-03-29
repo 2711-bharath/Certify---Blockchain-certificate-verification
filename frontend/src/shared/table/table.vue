@@ -329,7 +329,7 @@ export default {
                   html: `
                   <h4>Certificate Name: ${certificate.name}</h4>
                   <p>User <bold>${this.user.profile.name}<bold> shared a certificate with you</p>
-                  <p>To view certificate <a href="http://localhost:9000/${certificate.uid}">click here</a></p>
+                  <p>To view certificate <a href="http://localhost:9000/certificate/${certificate.uid}">click here</a></p>
                 `,
                 });
             } catch (err) {
