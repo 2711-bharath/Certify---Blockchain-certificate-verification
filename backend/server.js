@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const sgMail = require("@sendgrid/mail");
 
 const { connect } = require("./DB/connect");
 const userRouter = require("./routes/userRoute");
@@ -18,7 +19,25 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/certificate", certificateRoute);
 
+app.post("/send-email", async (req, res) => {
+  try {
+    const { to, subject, html } = req.body;
+    const msg = {
+      to,
+      from: "blueknight2711@gmail.com",
+      subject,
+      html,
+    };
+    await sgMail.send(msg);
+    res.send("Email sent");
+  } catch (err) {
+    console.log(err);
+    res.send("Sending email failed");
+  }
+});
+
 app.listen(process.env.PORT || 3000, async () => {
+  sgMail.setApiKey(process.env.SEND_GRID_API);
   console.log("listening to port " + (process.env.PORT || 3000));
   await connect();
 });

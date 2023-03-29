@@ -192,6 +192,7 @@ import SharePopup from "./share-popup.vue";
 import MineBlock from "./mine-block.vue";
 import QrPopup from "./qr-popup.vue";
 import Card from "./card.vue";
+import apiService from "../../apis/service";
 
 export default {
   components: {
@@ -306,6 +307,13 @@ export default {
 
             const body = certificate;
             try {
+              const emails = userIds
+                .filter((userId) => !certificate.sharedWith.includes(userId))
+                .map((userId) => this.users[userId].email);
+              console.log(
+                "🚀 ~ file: table.vue:313 ~ share: ~ emails:",
+                emails
+              );
               body.sharedWith = userIds;
               body.file.lastModifiedDate = new Date();
               const certificates = [
@@ -314,6 +322,16 @@ export default {
               ];
 
               await this.updateCertificate({ body, certificates });
+              if (emails.length)
+                await apiService.post("/send-email", {
+                  to: emails,
+                  subject: `Certificate shared`,
+                  html: `
+                  <h4>Certificate Name: ${certificate.name}</h4>
+                  <p>User <bold>${this.user.profile.name}<bold> shared a certificate with you</p>
+                  <p>To view certificate <a href="http://localhost:9000/certificate/${certificate.uid}">click here</a></p>
+                `,
+                });
             } catch (err) {
               console.log("🚀 ~ file: table.vue:195 ~ share: ~ err:", err);
             }

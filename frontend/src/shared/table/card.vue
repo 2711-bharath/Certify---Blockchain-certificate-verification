@@ -125,6 +125,11 @@
         <span class="has-text-weight-semibold">
           {{ $parent.getFormattedDate(certificate.file.lastModifiedDate) }}
         </span>
+        <br />
+        File size
+        <span class="has-text-weight-semibold">
+          {{ $parent.getFileSize(certificate.file.size) }}
+        </span>
       </div>
     </div>
   </div>
