@@ -29,12 +29,28 @@
             </a>
           </li>
         </ul>
-        <div class="select is-normal">
-          <select v-model="filter_by">
-            <option :value="null">None</option>
-            <option :value="true">Mined</option>
-            <option :value="false">Not Mined</option>
-          </select>
+        <div class="is-flex">
+          <div class="field mr-2">
+            <p class="control has-icons-left">
+              <input
+                class="input"
+                type="text"
+                placeholder="Search"
+                v-model="search"
+              />
+              <span class="icon is-small is-left">
+                <i class="far fa-search"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="select is-normal">
+            <select v-model="filter_by" class="is-size-6">
+              <option :value="null">None</option>
+              <option :value="true">Mined</option>
+              <option :value="false">Not Mined</option>
+            </select>
+          </div>
         </div>
       </div>
       <div v-if="view === 'list'" :style="{ paddingBottom: '2.5rem' }">
@@ -209,6 +225,7 @@ export default {
       show_menu: "",
       view: "list",
       filter_by: null,
+      search: "",
     };
   },
   computed: {
@@ -217,10 +234,23 @@ export default {
       return window.location.origin;
     },
     getData() {
-      if (this.filter_by === null) return this.data;
-      return this.data.filter(
-        (certificate) => certificate.mined === this.filter_by
-      );
+      if (this.filter_by === null && this.search === "") return this.data;
+      let values = this.data;
+      if (this.filter_by !== null)
+        values = values.filter(
+          (certificate) => certificate.mined === this.filter_by
+        );
+      if (this.search !== "")
+        values = values.filter(
+          (certificate) =>
+            certificate.name
+              .toLowerCase()
+              .includes(this.search.toLowerCase()) ||
+            this.getOwner(certificate.userUid)
+              .toLowerCase()
+              .includes(this.search.toLowerCase())
+        );
+      return values;
     },
   },
   methods: {
@@ -251,21 +281,36 @@ export default {
         day: "numeric",
       });
     },
-    async certificateStatus(certificate, deleted = true) {
-      this.$root.isLoading = true;
+    certificateStatus(certificate, deleted = true) {
+      this.$buefy.dialog.confirm({
+        title: `${deleted ? "Deleting" : "Restoring"} certificate`,
+        message: `Are you sure you want to <b>${
+          deleted ? "delete" : "restore"
+        }</b> this certificate? This certificate will be moved to ${
+          deleted ? "trash" : "your files"
+        }.`,
+        confirmText: `${deleted ? "Delete" : "Restore"} Certificate`,
+        type: `${deleted ? "is-danger" : "is-primary"}`,
+        icon: `${deleted ? "trash" : "undo"}`,
+        iconPack: "far",
+        hasIcon: true,
+        onConfirm: async () => {
+          this.$root.isLoading = true;
 
-      const body = certificate;
-      try {
-        body.isDeleted = deleted;
-        body.file.lastModifiedDate = new Date();
-        const certificates = this.data.filter(
-          (val) => val.uid !== certificate.uid
-        );
-        await this.updateCertificate({ body, certificates });
-      } catch (err) {
-        console.log("🚀 ~ file: my-files.vue:62 ~ delete ~ err:", err);
-      }
-      this.$root.isLoading = false;
+          const body = certificate;
+          try {
+            body.isDeleted = deleted;
+            body.file.lastModifiedDate = new Date();
+            const certificates = this.data.filter(
+              (val) => val.uid !== certificate.uid
+            );
+            await this.updateCertificate({ body, certificates });
+          } catch (err) {
+            console.log("🚀 ~ file: my-files.vue:62 ~ delete ~ err:", err);
+          }
+          this.$root.isLoading = false;
+        },
+      });
     },
     viewCertificate(certificate) {
       console.log(
