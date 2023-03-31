@@ -88,6 +88,14 @@ export default {
   },
   methods: {
     async mineBlock() {
+      if (this.nonce < 0) {
+        this.$toast.open({
+          message: `Invalid nonce value`,
+          type: "error",
+        });
+        return;
+      }
+
       this.$root.isLoading = true;
       try {
         const data = await apiService.post(`/certificate/mineBlock`, {
