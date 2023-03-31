@@ -37,7 +37,12 @@ app.post("/send-email", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, async () => {
-  sgMail.setApiKey(process.env.SEND_GRID_API);
-  console.log("listening to port " + (process.env.PORT || 3000));
-  await connect();
+  try {
+    sgMail.setApiKey(process.env.SEND_GRID_API);
+    console.log("listening to port " + (process.env.PORT || 3000));
+    await connect();
+  } catch (err) {
+    console.log("Error in initializing app");
+    console.log("🚀 ~ file: server.js:45 ~ app.listen ~ err:", err);
+  }
 });
